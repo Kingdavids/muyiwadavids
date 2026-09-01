@@ -1,0 +1,22 @@
+version: 1
+
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+
+    build:
+      commands:
+        - env | grep -e OPENAI_SECRET_ID -e SES_REGION -e LEADS_FROM_EMAIL -e LEADS_TO_EMAIL >> .env.production
+        - npm run build
+
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*

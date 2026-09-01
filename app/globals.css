@@ -4973,6 +4973,1465 @@ pointer: coarse
   }
 }
 
+/* =========================================================
+   TAKE A WALK WITH ME
+   AI COMPANION
+========================================================= */
+
+.walk-launcher {
+  position: fixed;
+
+  right: 28px;
+  bottom: 28px;
+
+  z-index: 8000;
+
+  width: 220px;
+  min-height: 72px;
+
+  padding: 10px 13px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  border:
+          1px solid
+          rgba(244, 240, 232, 0.15);
+
+  background:
+          rgba(9, 10, 11, 0.88);
+
+  color: var(--paper);
+
+  text-align: left;
+
+  cursor: pointer;
+
+  backdrop-filter:
+          blur(18px);
+
+  box-shadow:
+          0 18px 60px
+          rgba(0, 0, 0, 0.28);
+
+  transition:
+          transform 400ms
+          cubic-bezier(
+                  0.16,
+                  1,
+                  0.3,
+                  1
+          ),
+          border-color 300ms ease,
+          background 300ms ease;
+}
+
+.walk-launcher:hover {
+  transform:
+          translateY(-4px);
+
+  border-color:
+          rgba(242, 107, 66, 0.5);
+
+  background:
+          rgba(15, 17, 18, 0.96);
+}
+
+.walk-launcher-orbit {
+  position: relative;
+
+  flex: 0 0 48px;
+
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+          1px solid
+          rgba(244, 240, 232, 0.12);
+
+  border-radius: 50%;
+}
+
+.walk-launcher-orbit strong {
+  position: relative;
+
+  z-index: 2;
+
+  font-family:
+          var(--font-display),
+          sans-serif;
+
+  font-size: 0.72rem;
+
+  letter-spacing: -0.04em;
+}
+
+.walk-launcher-orbit > i {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  border:
+          1px solid
+          rgba(242, 107, 66, 0.28);
+
+  border-radius: 50%;
+
+  transform:
+          translate(-50%, -50%);
+}
+
+.walk-launcher-orbit > i:nth-child(1) {
+  width: 34px;
+  height: 34px;
+
+  animation:
+          walkOrbit 8s
+          linear infinite;
+}
+
+.walk-launcher-orbit > i:nth-child(2) {
+  width: 42px;
+  height: 42px;
+
+  border-style: dashed;
+
+  animation:
+          walkOrbitReverse 11s
+          linear infinite;
+}
+
+.walk-launcher-orbit > i:nth-child(3) {
+  width: 5px;
+  height: 5px;
+
+  left: auto;
+  right: 0;
+  top: 7px;
+
+  border: 0;
+
+  background:
+          var(--signal);
+
+  box-shadow:
+          0 0 13px
+          rgba(242, 107, 66, 0.8);
+
+  transform: none;
+}
+
+.walk-launcher-copy {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.walk-launcher-copy small {
+  margin-bottom: 4px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.3rem;
+
+  letter-spacing: 0.16em;
+
+  color: var(--signal);
+}
+
+.walk-launcher-copy strong,
+.walk-launcher-copy em {
+  font-family:
+          var(--font-display),
+          sans-serif;
+
+  font-size: 0.72rem;
+
+  line-height: 1;
+
+  letter-spacing: -0.025em;
+}
+
+.walk-launcher-copy em {
+  margin-top: 3px;
+
+  font-style: normal;
+
+  color:
+          rgba(244, 240, 232, 0.55);
+}
+
+.walk-online {
+  margin-left: auto;
+
+  align-self: flex-start;
+}
+
+.walk-online i {
+  display: block;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: var(--signal);
+
+  box-shadow:
+          0 0 12px
+          rgba(242, 107, 66, 0.7);
+
+  animation:
+          walkOnline 2s
+          ease-in-out infinite;
+}
+
+
+/* =========================================================
+   BACKDROP
+========================================================= */
+
+.walk-backdrop {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 8998;
+
+  visibility: hidden;
+
+  opacity: 0;
+
+  background:
+          rgba(3, 4, 4, 0.68);
+
+  backdrop-filter:
+          blur(5px);
+
+  transition:
+          opacity 450ms ease,
+          visibility 450ms ease;
+}
+
+.walk-backdrop-open {
+  visibility: visible;
+
+  opacity: 1;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.walk-panel {
+  position: fixed;
+
+  top: 0;
+  right: 0;
+
+  z-index: 8999;
+
+  width:
+          min(
+                  500px,
+                  94vw
+          );
+
+  height: 100vh;
+
+  display: grid;
+
+  grid-template-rows:
+        auto
+        auto
+        auto
+        1fr
+        auto
+        auto;
+
+  overflow: hidden;
+
+  border-left:
+          1px solid
+          rgba(244, 240, 232, 0.12);
+
+  background:
+          #090a0b;
+
+  color: var(--paper);
+
+  transform:
+          translateX(102%);
+
+  transition:
+          transform
+          650ms
+          cubic-bezier(
+                  0.16,
+                  1,
+                  0.3,
+                  1
+          );
+
+  box-shadow:
+          -30px 0 100px
+          rgba(0, 0, 0, 0.4);
+}
+
+.walk-panel-open {
+  transform:
+          translateX(0);
+}
+
+.walk-panel-grid {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -1;
+
+  opacity: 0.045;
+
+  pointer-events: none;
+
+  background-image:
+          linear-gradient(
+                  rgba(244, 240, 232, 0.2)
+                  1px,
+                  transparent 1px
+          ),
+          linear-gradient(
+                  90deg,
+                  rgba(244, 240, 232, 0.2)
+                  1px,
+                  transparent 1px
+          );
+
+  background-size:
+          34px 34px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.walk-head {
+  min-height: 86px;
+
+  padding:
+          18px
+          20px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom:
+          1px solid var(--line);
+}
+
+.walk-brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.walk-mark {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+          1px solid
+          rgba(242, 107, 66, 0.4);
+
+  border-radius: 50%;
+
+  font-family:
+          var(--font-display),
+          sans-serif;
+
+  font-size: 0.75rem;
+
+  font-weight: 700;
+
+  color: var(--signal);
+}
+
+.walk-brand > div:last-child {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.walk-brand span {
+  margin-bottom: 3px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.28rem;
+
+  letter-spacing: 0.14em;
+
+  color: var(--signal);
+}
+
+.walk-brand strong {
+  font-family:
+          var(--font-display),
+          sans-serif;
+
+  font-size: 1rem;
+
+  font-weight: 600;
+
+  letter-spacing: -0.035em;
+}
+
+.walk-close {
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+
+  border:
+          1px solid var(--line);
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.walk-close span {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 14px;
+  height: 1px;
+
+  background: var(--paper);
+}
+
+.walk-close span:first-child {
+  transform:
+          translate(-50%, -50%)
+          rotate(45deg);
+}
+
+.walk-close span:last-child {
+  transform:
+          translate(-50%, -50%)
+          rotate(-45deg);
+}
+
+.walk-close:hover {
+  border-color:
+          var(--signal);
+}
+
+
+/* =========================================================
+   ROUTE
+========================================================= */
+
+.walk-route {
+  padding:
+          10px
+          20px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  border-bottom:
+          1px solid
+          rgba(244, 240, 232, 0.07);
+
+  font-family:
+          var(--font-mono),
+          monospace;
+}
+
+.walk-route span {
+  font-size: 0.27rem;
+
+  letter-spacing: 0.13em;
+
+  color:
+          rgba(244, 240, 232, 0.3);
+}
+
+.walk-route strong {
+  font-size: 0.34rem;
+
+  letter-spacing: 0.1em;
+
+  color: var(--signal);
+}
+
+.walk-route i {
+  width: 5px;
+  height: 5px;
+
+  margin-left: auto;
+
+  border-radius: 50%;
+
+  background: var(--signal);
+
+  box-shadow:
+          0 0 12px
+          rgba(242, 107, 66, 0.7);
+}
+
+
+/* =========================================================
+   JOURNEYS
+========================================================= */
+
+.walk-journeys {
+  padding:
+          13px
+          16px;
+
+  display: grid;
+
+  grid-template-columns:
+        repeat(3, 1fr);
+
+  gap: 7px;
+
+  border-bottom:
+          1px solid var(--line);
+}
+
+.walk-journey {
+  min-width: 0;
+
+  padding:
+          10px
+          9px;
+
+  display: grid;
+
+  grid-template-columns:
+        auto
+        1fr
+        auto;
+
+  align-items: center;
+
+  gap: 7px;
+
+  border:
+          1px solid
+          rgba(244, 240, 232, 0.09);
+
+  background:
+          rgba(244, 240, 232, 0.025);
+
+  color: var(--paper);
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+          border-color 250ms ease,
+          background 250ms ease,
+          transform 250ms ease;
+}
+
+.walk-journey:hover,
+.walk-journey-active {
+  border-color:
+          rgba(242, 107, 66, 0.45);
+
+  background:
+          rgba(242, 107, 66, 0.06);
+}
+
+.walk-journey:hover {
+  transform:
+          translateY(-2px);
+}
+
+.walk-journey > span {
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.27rem;
+
+  color: var(--signal);
+}
+
+.walk-journey div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.walk-journey strong {
+  overflow: hidden;
+
+  font-family:
+          var(--font-display),
+          sans-serif;
+
+  font-size: 0.4rem;
+
+  letter-spacing: -0.01em;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+.walk-journey small {
+  overflow: hidden;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.22rem;
+
+  color:
+          rgba(244, 240, 232, 0.3);
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+.walk-journey > i {
+  font-style: normal;
+
+  font-size: 0.55rem;
+
+  color:
+          rgba(244, 240, 232, 0.3);
+}
+
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+.walk-messages {
+  min-height: 0;
+
+  padding:
+          24px
+          20px;
+
+  overflow-y: auto;
+
+  overscroll-behavior:
+          contain;
+
+  scrollbar-width: thin;
+
+  scrollbar-color:
+          rgba(244, 240, 232, 0.16)
+          transparent;
+}
+
+.walk-message {
+  margin-bottom: 22px;
+}
+
+.walk-message-label {
+  margin-bottom: 7px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.27rem;
+
+  letter-spacing: 0.12em;
+
+  color:
+          rgba(244, 240, 232, 0.3);
+}
+
+.walk-message-assistant
+.walk-message-label {
+  color: var(--signal);
+}
+
+.walk-message-user {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+}
+
+.walk-message-user
+.walk-message-label {
+  text-align: right;
+}
+
+.walk-message-bubble {
+  max-width: 88%;
+
+  padding:
+          13px
+          15px;
+
+  border:
+          1px solid
+          rgba(244, 240, 232, 0.08);
+
+  background:
+          rgba(244, 240, 232, 0.035);
+
+  font-family:
+          var(--font-sans),
+          sans-serif;
+
+  font-size: 0.78rem;
+
+  line-height: 1.65;
+
+  white-space: pre-wrap;
+}
+
+.walk-message-user
+.walk-message-bubble {
+  border-color:
+          rgba(242, 107, 66, 0.22);
+
+  background:
+          rgba(242, 107, 66, 0.08);
+}
+
+
+/* =========================================================
+   THINKING
+========================================================= */
+
+.walk-thinking {
+  width: max-content;
+
+  padding:
+          12px
+          15px;
+
+  display: flex;
+
+  gap: 5px;
+
+  border:
+          1px solid
+          rgba(244, 240, 232, 0.08);
+
+  background:
+          rgba(244, 240, 232, 0.025);
+}
+
+.walk-thinking i {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background:
+          var(--signal);
+
+  animation:
+          walkThinking
+          1.1s
+          ease-in-out
+          infinite;
+}
+
+.walk-thinking i:nth-child(2) {
+  animation-delay:
+          120ms;
+}
+
+.walk-thinking i:nth-child(3) {
+  animation-delay:
+          240ms;
+}
+
+
+/* =========================================================
+   COMPOSER
+========================================================= */
+
+.walk-composer {
+  padding:
+          14px
+          16px;
+
+  display: grid;
+
+  grid-template-columns:
+        1fr
+        auto;
+
+  gap: 8px;
+
+  border-top:
+          1px solid var(--line);
+
+  background:
+          rgba(9, 10, 11, 0.96);
+}
+
+.walk-input-wrap {
+  position: relative;
+
+  min-width: 0;
+
+  border:
+          1px solid
+          rgba(244, 240, 232, 0.13);
+
+  background:
+          rgba(244, 240, 232, 0.025);
+
+  transition:
+          border-color
+          250ms ease;
+}
+
+.walk-input-wrap:focus-within {
+  border-color:
+          rgba(242, 107, 66, 0.5);
+}
+
+.walk-input-wrap textarea {
+  width: 100%;
+
+  min-height: 52px;
+  max-height: 120px;
+
+  padding:
+          15px
+          52px
+          12px
+          13px;
+
+  resize: none;
+
+  border: 0;
+  outline: 0;
+
+  background:
+          transparent;
+
+  color: var(--paper);
+
+  font-family:
+          var(--font-sans),
+          sans-serif;
+
+  font-size: 0.75rem;
+
+  line-height: 1.4;
+}
+
+.walk-input-wrap textarea::placeholder {
+  color:
+          rgba(244, 240, 232, 0.28);
+}
+
+.walk-input-wrap > span {
+  position: absolute;
+
+  right: 8px;
+  bottom: 7px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.22rem;
+
+  color:
+          rgba(244, 240, 232, 0.2);
+}
+
+.walk-send {
+  width: 65px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 3px;
+
+  border: 0;
+
+  background:
+          var(--signal);
+
+  color: var(--bg);
+
+  cursor: pointer;
+
+  transition:
+          transform 250ms ease,
+          background 250ms ease,
+          opacity 250ms ease;
+}
+
+.walk-send:hover:not(:disabled) {
+  transform:
+          translateY(-2px);
+
+  background:
+          var(--paper);
+}
+
+.walk-send:disabled {
+  opacity: 0.3;
+
+  cursor: not-allowed;
+}
+
+.walk-send span {
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.28rem;
+
+  letter-spacing: 0.1em;
+}
+
+.walk-send strong {
+  font-size: 0.9rem;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   FOOT
+========================================================= */
+
+.walk-foot {
+  min-height: 28px;
+
+  padding:
+          0
+          16px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  border-top:
+          1px solid
+          rgba(244, 240, 232, 0.05);
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.2rem;
+
+  letter-spacing: 0.08em;
+
+  color:
+          rgba(244, 240, 232, 0.22);
+}
+
+.walk-foot i {
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background: var(--signal);
+}
+
+
+/* =========================================================
+   WALK ANIMATIONS
+========================================================= */
+
+@keyframes walkOrbit {
+  to {
+    transform:
+            translate(-50%, -50%)
+            rotate(360deg);
+  }
+}
+
+@keyframes walkOrbitReverse {
+  to {
+    transform:
+            translate(-50%, -50%)
+            rotate(-360deg);
+  }
+}
+
+@keyframes walkOnline {
+  0%,
+  100% {
+    opacity: 0.35;
+
+    transform:
+            scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform:
+            scale(1.2);
+  }
+}
+
+@keyframes walkThinking {
+  0%,
+  100% {
+    opacity: 0.25;
+
+    transform:
+            translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform:
+            translateY(-3px);
+  }
+}
+
+/* =========================================================
+   AI CONFIRMATION CARD
+========================================================= */
+
+.walk-confirm {
+  margin:
+          8px 0 24px;
+
+  padding:
+          18px;
+
+  border:
+          1px solid
+          rgba(242, 107, 66, 0.38);
+
+  background:
+          linear-gradient(
+                  145deg,
+                  rgba(242, 107, 66, 0.08),
+                  rgba(244, 240, 232, 0.025)
+          );
+
+  box-shadow:
+          0 18px 50px
+          rgba(0, 0, 0, 0.18);
+}
+
+.walk-confirm-top {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 11px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.27rem;
+
+  letter-spacing: 0.14em;
+
+  color: var(--signal);
+}
+
+.walk-confirm-top i {
+  width: 5px;
+  height: 5px;
+
+  margin-left: auto;
+
+  border-radius: 50%;
+
+  background:
+          var(--signal);
+
+  box-shadow:
+          0 0 12px
+          rgba(242, 107, 66, 0.7);
+}
+
+.walk-confirm h3 {
+  margin:
+          0 0 16px;
+
+  font-family:
+          var(--font-display),
+          sans-serif;
+
+  font-size: 1.15rem;
+
+  letter-spacing:
+          -0.035em;
+}
+
+.walk-confirm-fields {
+  border-top:
+          1px solid
+          rgba(244, 240, 232, 0.08);
+}
+
+.walk-confirm-row {
+  padding:
+          9px 0;
+
+  display: grid;
+
+  grid-template-columns:
+        115px 1fr;
+
+  gap: 12px;
+
+  border-bottom:
+          1px solid
+          rgba(244, 240, 232, 0.07);
+}
+
+.walk-confirm-row span {
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.28rem;
+
+  letter-spacing:
+          0.08em;
+
+  color:
+          rgba(244, 240, 232, 0.35);
+}
+
+.walk-confirm-row strong {
+  font-family:
+          var(--font-sans),
+          sans-serif;
+
+  font-size: 0.7rem;
+
+  font-weight: 500;
+
+  line-height: 1.45;
+
+  overflow-wrap:
+          anywhere;
+}
+
+.walk-confirm-button {
+  width: 100%;
+
+  min-height: 52px;
+
+  margin-top: 15px;
+
+  padding:
+          0 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content:
+          space-between;
+
+  border: 0;
+
+  background:
+          var(--signal);
+
+  color: var(--bg);
+
+  cursor: pointer;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  transition:
+          transform 250ms ease,
+          background 250ms ease;
+}
+
+.walk-confirm-button:hover:not(
+        :disabled
+    ) {
+  transform:
+          translateY(-2px);
+
+  background:
+          var(--paper);
+}
+
+.walk-confirm-button:disabled {
+  opacity: 0.55;
+
+  cursor: wait;
+}
+
+.walk-confirm-button span {
+  font-size: 0.35rem;
+
+  letter-spacing:
+          0.1em;
+}
+
+.walk-confirm-button strong {
+  font-size: 1rem;
+
+  font-weight: 400;
+}
+
+.walk-confirm > small {
+  display: block;
+
+  margin-top: 10px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.23rem;
+
+  line-height: 1.5;
+
+  color:
+          rgba(244, 240, 232, 0.26);
+}
+
+.walk-confirm-error {
+  margin:
+          12px 0 0;
+
+  font-size: 0.65rem;
+
+  color: var(--signal);
+}
+
+.walk-confirm-success {
+  margin-top: 15px;
+
+  padding: 13px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  border:
+          1px solid
+          rgba(244, 240, 232, 0.15);
+}
+
+.walk-confirm-success > span {
+  width: 30px;
+  height: 30px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+          1px solid
+          var(--signal);
+
+  border-radius: 50%;
+
+  color: var(--signal);
+}
+
+.walk-confirm-success div {
+  display: flex;
+  flex-direction: column;
+}
+
+.walk-confirm-success strong {
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.32rem;
+
+  letter-spacing:
+          0.1em;
+}
+
+.walk-confirm-success p {
+  margin: 3px 0 0;
+
+  font-size: 0.62rem;
+
+  color:
+          rgba(244, 240, 232, 0.5);
+}
+
+@media (max-width: 520px) {
+  .walk-confirm-row {
+    grid-template-columns:
+            90px 1fr;
+  }
+}
+
+/* =========================================================
+   MOBILE AI COMPANION
+========================================================= */
+
+@media (max-width: 760px) {
+  .walk-launcher {
+    right: 14px;
+    bottom: 14px;
+
+    width: auto;
+    min-width: 64px;
+
+    min-height: 64px;
+
+    padding: 7px;
+  }
+
+  .walk-launcher-copy,
+  .walk-online {
+    display: none;
+  }
+
+  .walk-launcher-orbit {
+    width: 48px;
+    height: 48px;
+  }
+
+  .walk-panel {
+    width: 100%;
+
+    border-left: 0;
+  }
+
+  .walk-head {
+    min-height: 78px;
+
+    padding:
+            15px
+            16px;
+  }
+
+  .walk-journeys {
+    padding:
+            10px;
+
+    gap: 5px;
+  }
+
+  .walk-journey {
+    min-height: 58px;
+
+    padding:
+            8px;
+
+    grid-template-columns:
+            1fr;
+  }
+
+  .walk-journey > span,
+  .walk-journey > i {
+    display: none;
+  }
+
+  .walk-journey strong {
+    font-size: 0.34rem;
+  }
+
+  .walk-journey small {
+    font-size: 0.19rem;
+  }
+
+  .walk-messages {
+    padding:
+            18px
+            14px;
+  }
+
+  .walk-message-bubble {
+    max-width: 92%;
+
+    font-size: 0.76rem;
+  }
+
+  .walk-composer {
+    padding:
+            10px;
+
+    padding-bottom:
+            max(
+                    10px,
+                    env(
+                            safe-area-inset-bottom
+                    )
+            );
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (
+prefers-reduced-motion:
+        reduce
+) {
+  .walk-launcher-orbit > i,
+  .walk-online i,
+  .walk-thinking i {
+    animation:
+            none !important;
+  }
+
+  .walk-panel,
+  .walk-backdrop {
+    transition-duration:
+            0.01ms !important;
+  }
+}
 
 /* =========================================================
    REDUCED MOTION

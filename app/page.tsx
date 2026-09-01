@@ -1,5 +1,5 @@
 "use client";
-
+import WalkWithMe from "../components/WalkWithMe/WalkWithMe";
 import Image from "next/image";
 import {
   useEffect,
@@ -598,11 +598,10 @@ export default function Home() {
                     </span>
 
             <a
-                href={SITE.booking}
-                target="_blank"
-                rel="noreferrer"
+                href="#walk-with-me"
                 className="nav-cta"
                 data-cursor="BOOK"
+                data-walk-mode="lords"
             >
               BOOK ME ↗
             </a>
@@ -667,15 +666,14 @@ export default function Home() {
                 </a>
 
                 <a
-                    href={SITE.booking}
-                    target="_blank"
-                    rel="noreferrer"
+                    href="#walk-with-me"
                     className="secondary-link"
                     data-cursor="BOOK"
+                    data-walk-mode="lords"
                 >
-                  Book Lord&apos;s
-                  Nta10ment ↗
+                  Book Lord&apos;s Nta10ment ↗
                 </a>
+
               </div>
             </div>
           </div>
@@ -1503,14 +1501,12 @@ export default function Home() {
             </div>
 
             <a
-                href={SITE.booking}
-                target="_blank"
-                rel="noreferrer"
+                href="#walk-with-me"
                 className="booking-circle"
                 data-cursor="BOOK"
+                data-walk-mode="lords"
             >
               <span>BOOK ME</span>
-
               <strong>↗</strong>
             </a>
           </div>
@@ -1584,6 +1580,7 @@ export default function Home() {
             MUYIWA DAVIDS
                 </span>
         </footer>
+        <WalkWithMe />
       </main>
   );
 }
