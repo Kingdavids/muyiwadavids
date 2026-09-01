@@ -268,8 +268,8 @@ export default function Home() {
   }, []);
 
   /* =====================================================
-     CUSTOM CURSOR LABELS
-  ===================================================== */
+    CUSTOM CURSOR LABELS
+ ===================================================== */
 
   useEffect(() => {
     const items =
@@ -290,8 +290,7 @@ export default function Home() {
     items.forEach((item) => {
       const enter = () => {
         setCursorLabel(
-            item.dataset.cursor ||
-            "OPEN"
+            item.dataset.cursor || "OPEN"
         );
 
         cursorRef.current?.classList.add(
@@ -345,6 +344,32 @@ export default function Home() {
       });
     };
   }, [showIntro]);
+
+
+  /* =====================================================
+     RESTORE LANDING PAGE AFTER BROWSER BACK
+  ===================================================== */
+
+  useEffect(() => {
+    const restoreLandingPage = () => {
+      setLeavingSite(false);
+      setLeavingLabel("");
+
+      document.body.style.overflow = "";
+    };
+
+    window.addEventListener(
+        "pageshow",
+        restoreLandingPage
+    );
+
+    return () => {
+      window.removeEventListener(
+          "pageshow",
+          restoreLandingPage
+      );
+    };
+  }, []);
 
   /* =====================================================
      WORLD CARD MOUSE TILT
@@ -448,46 +473,41 @@ export default function Home() {
     setLeavingSite(true);
 
     window.setTimeout(() => {
-      window.location.href = href;
+      window.location.assign(href);
     }, 650);
   };
 
   return (
       <main className="landing">
 
-        <div
-            className={`
-        outbound-transition
-        ${
-                leavingSite
-                    ? "outbound-transition-active"
-                    : ""
-            }
-    `}
-            aria-hidden={!leavingSite}
-        >
-          <div className="outbound-grid" />
+        {leavingSite && (
+            <div
+                className="outbound-transition outbound-transition-active"
+                aria-hidden="true"
+            >
+              <div className="outbound-grid" />
 
-          <div className="outbound-scan" />
+              <div className="outbound-scan" />
 
-          <div className="outbound-content">
-        <span>
-            MD / TRANSFER SYSTEM
-        </span>
+              <div className="outbound-content">
+            <span>
+                MD / TRANSFER SYSTEM
+            </span>
 
-            <strong>
-              {leavingLabel || "NEXT"}
-            </strong>
+                <strong>
+                  {leavingLabel || "NEXT"}
+                </strong>
 
-            <p>
-              ENTERING CREATIVE WORLD
-            </p>
+                <p>
+                  ENTERING CREATIVE WORLD
+                </p>
 
-            <div className="outbound-loader">
-              <i />
+                <div className="outbound-loader">
+                  <i />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+        )}
         {/* =================================================
                 INTRO
             ================================================= */}
