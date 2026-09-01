@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <rect width="512" height="512" rx="100" fill="#090a0b"></rect>
+
+    <circle cx="405" cy="107" r="25" fill="#f26b42"></circle>
+
+    <text x="256" y="310" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="180" font-weight="800" letter-spacing="-15" fill="#f4f0e8">
+        MD.
+    </text>
+</svg>
