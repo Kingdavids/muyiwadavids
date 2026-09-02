@@ -8,7 +8,7 @@ frontend:
 
     build:
       commands:
-        - env | grep -e OPENAI_SECRET_ID -e SES_REGION -e LEADS_FROM_EMAIL -e LEADS_TO_EMAIL >> .env.production
+        - env | grep -e OPENAI_SECRET_ID -e SES_REGION -e LEADS_FROM_EMAIL -e LEADS_TO_EMAIL -e RATE_LIMIT_TABLE >> .env.production
         - npm run build
 
   artifacts:

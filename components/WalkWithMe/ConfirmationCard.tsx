@@ -156,6 +156,7 @@ export default function ConfirmationCard({
                 <button
                     type="button"
                     className="walk-confirm-button"
+                    data-cursor="CONFIRM"
                     disabled={
                         submitting
                     }

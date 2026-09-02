@@ -5248,6 +5248,8 @@ pointer: coarse
           );
 
   height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
 
   display: grid;
 
@@ -5511,58 +5513,7 @@ pointer: coarse
    JOURNEYS
 ========================================================= */
 
-.walk-journeys {
-  padding:
-          13px
-          16px;
-
-  display: grid;
-
-  grid-template-columns:
-        repeat(3, 1fr);
-
-  gap: 7px;
-
-  border-bottom:
-          1px solid var(--line);
-}
-
-.walk-journey {
-  min-width: 0;
-
-  padding:
-          10px
-          9px;
-
-  display: grid;
-
-  grid-template-columns:
-        auto
-        1fr
-        auto;
-
-  align-items: center;
-
-  gap: 7px;
-
-  border:
-          1px solid
-          rgba(244, 240, 232, 0.09);
-
-  background:
-          rgba(244, 240, 232, 0.025);
-
-  color: var(--paper);
-
-  text-align: left;
-
-  cursor: pointer;
-
-  transition:
-          border-color 250ms ease,
-          background 250ms ease,
-          transform 250ms ease;
-}
+.walk-journey
 
 .walk-journey:hover,
 .walk-journey-active {
@@ -5583,7 +5534,7 @@ pointer: coarse
           var(--font-mono),
           monospace;
 
-  font-size: 0.27rem;
+  font-size: 0.32rem;
 
   color: var(--signal);
 }
@@ -5604,7 +5555,7 @@ pointer: coarse
           var(--font-display),
           sans-serif;
 
-  font-size: 0.4rem;
+  font-size: 0.5rem;
 
   letter-spacing: -0.01em;
 
@@ -5616,14 +5567,18 @@ pointer: coarse
 .walk-journey small {
   overflow: hidden;
 
+  margin-top: 3px;
+
   font-family:
           var(--font-mono),
           monospace;
 
   font-size: 0.22rem;
 
+  line-height: 1.35;
+
   color:
-          rgba(244, 240, 232, 0.3);
+          rgba(244, 240, 232, 0.38);
 
   white-space: nowrap;
 
@@ -5633,7 +5588,7 @@ pointer: coarse
 .walk-journey > i {
   font-style: normal;
 
-  font-size: 0.55rem;
+  font-size: 0.7rem;
 
   color:
           rgba(244, 240, 232, 0.3);
@@ -6341,7 +6296,14 @@ pointer: coarse
   }
 
   .walk-panel {
-    width: 100%;
+    grid-template-rows:
+        auto
+        auto
+        auto
+        minmax(0, 1fr)
+        auto
+        auto;
+  }
 
     border-left: 0;
   }
@@ -6354,40 +6316,49 @@ pointer: coarse
             16px;
   }
 
+@media (max-width: 760px) {
   .walk-journeys {
-    padding:
-            10px;
+    padding: 12px;
 
-    gap: 5px;
+    grid-template-columns: 1fr;
+
+    gap: 8px;
   }
 
   .walk-journey {
-    min-height: 58px;
+    min-height: 72px;
 
     padding:
-            8px;
+            12px
+            14px;
 
     grid-template-columns:
-            1fr;
+            auto
+            1fr
+            auto;
   }
 
-  .walk-journey > span,
+  .walk-journey > span {
+    display: block;
+
+    font-size: 0.28rem;
+  }
+
   .walk-journey > i {
-    display: none;
+    display: block;
   }
 
   .walk-journey strong {
-    font-size: 0.34rem;
+    font-size: 0.5rem;
   }
 
   .walk-journey small {
-    font-size: 0.19rem;
+    font-size: 0.24rem;
   }
+}
 
   .walk-messages {
-    padding:
-            18px
-            14px;
+    padding: 18px 14px;
   }
 
   .walk-message-bubble {
@@ -6397,18 +6368,68 @@ pointer: coarse
   }
 
   .walk-composer {
-    padding:
-            10px;
+    padding: 10px;
 
-    padding-bottom:
-            max(
-                    10px,
-                    env(
-                            safe-area-inset-bottom
-                    )
+    padding-bottom: max(10px,env(safe-area-inset-bottom)
             );
   }
+
+/* =========================================================
+ WALK WITH ME — CURSOR OVERRIDE
+========================================================= */
+
+.walk-panel,
+.walk-panel *,
+.walk-launcher,
+.walk-launcher * {
+  cursor: auto;
 }
+
+.walk-panel button,
+.walk-panel a,
+.walk-launcher {
+  cursor: pointer;
+}
+
+.walk-panel textarea,
+.walk-panel input {
+  cursor: text;
+}
+
+@media (max-width: 760px) {
+  .walk-panel {
+    height: 100dvh;
+    max-height: 100dvh;
+  }
+
+  .walk-messages {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .walk-composer {
+    position: relative;
+    z-index: 5;
+
+    flex-shrink: 0;
+
+    padding:
+            10px
+            10px
+            max(
+                    10px,
+                    env(safe-area-inset-bottom)
+            );
+
+    background: #090a0b;
+  }
+
+  .walk-foot {
+    flex-shrink: 0;
+  }
+}
+
 
 
 /* =========================================================
@@ -6613,4 +6634,360 @@ button:focus-visible {
   .world-card {
     transform: none;
   }
+}
+
+/* =========================================================
+   WALK JOURNEY CARDS — FINAL FIX
+========================================================= */
+
+.walk-journeys {
+  padding: 16px 18px;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.walk-journey {
+  width: 100%;
+  min-width: 0;
+  min-height: 86px;
+
+  padding: 14px 12px;
+
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+
+  gap: 10px;
+
+  overflow: hidden;
+
+  border:
+          1px solid
+          rgba(244, 240, 232, 0.12);
+
+  background:
+          rgba(244, 240, 232, 0.03);
+
+  color: var(--paper);
+
+  text-align: left;
+
+  box-sizing: border-box;
+
+  cursor: pointer;
+}
+
+.walk-journey > span {
+  display: block;
+
+  flex-shrink: 0;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.34rem;
+
+  color: var(--signal);
+}
+
+.walk-journey > div {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  overflow: hidden;
+}
+
+.walk-journey strong {
+  display: block;
+
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  font-family:
+          var(--font-display),
+          sans-serif;
+
+  font-size: 0.52rem;
+  line-height: 1.1;
+
+  letter-spacing: -0.01em;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.walk-journey small {
+  display: block;
+
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.24rem;
+  line-height: 1.35;
+
+  color:
+          rgba(244, 240, 232, 0.42);
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.walk-journey > i {
+  display: block;
+
+  flex-shrink: 0;
+
+  font-style: normal;
+
+  font-size: 0.72rem;
+
+  color:
+          rgba(244, 240, 232, 0.42);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+  .walk-journeys {
+    padding: 12px;
+
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+  }
+
+  .walk-journey {
+    width: 100%;
+    min-height: 74px;
+
+    padding:
+            12px
+            14px;
+
+    grid-template-columns:
+            28px
+            minmax(0, 1fr)
+            22px;
+
+    gap: 10px;
+
+    overflow: hidden;
+  }
+
+  .walk-journey > span {
+    display: block;
+
+    font-size: 0.3rem;
+  }
+
+  .walk-journey > div {
+    width: 100%;
+    min-width: 0;
+
+    overflow: hidden;
+  }
+
+  .walk-journey strong {
+    width: 100%;
+
+    font-size: 0.52rem;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .walk-journey small {
+    width: 100%;
+
+    font-size: 0.24rem;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .walk-journey > i {
+    display: block;
+
+    justify-self: end;
+
+    font-size: 0.7rem;
+  }
+
+  /* =========================================================
+   WALK JOURNEY CARDS — HOVER / ACTIVE
+========================================================= */
+
+  .walk-journey {
+    position: relative;
+
+    transition:
+            transform 250ms ease,
+            border-color 250ms ease,
+            background 250ms ease,
+            box-shadow 250ms ease;
+  }
+
+  .walk-journey:hover {
+    transform: translateY(-3px);
+
+    border-color:
+            rgba(242, 107, 66, 0.55);
+
+    background:
+            linear-gradient(
+                    135deg,
+                    rgba(242, 107, 66, 0.16),
+                    rgba(242, 107, 66, 0.04)
+            );
+
+    box-shadow:
+            0 12px 30px
+            rgba(0, 0, 0, 0.2);
+  }
+
+  .walk-journey:hover > span,
+  .walk-journey:hover > i {
+    color: var(--signal);
+  }
+
+  .walk-journey:hover strong {
+    color: var(--paper);
+  }
+
+  .walk-journey:hover small {
+    color:
+            rgba(244, 240, 232, 0.7);
+  }
+
+
+  /* selected/current journey */
+
+  .walk-journey-active {
+    border-color:
+            rgba(242, 107, 66, 0.75);
+
+    background:
+            rgba(242, 107, 66, 0.12);
+
+    box-shadow:
+            inset 0 0 0 1px
+            rgba(242, 107, 66, 0.08);
+  }
+
+  .walk-journey-active > span,
+  .walk-journey-active > i {
+    color: var(--signal);
+  }
+
+
+  /* mobile/touch feedback */
+
+  @media (hover: none) {
+    .walk-journey:hover {
+      transform: none;
+    }
+
+    .walk-journey:active {
+      transform: scale(0.985);
+
+      border-color:
+              rgba(242, 107, 66, 0.65);
+
+      background:
+              linear-gradient(
+                      135deg,
+                      rgba(242, 107, 66, 0.16),
+                      rgba(242, 107, 66, 0.04)
+              );
+    }
+  }
+}
+
+/* =========================================================
+   WALK JOURNEY — FORCE HOVER / ACTIVE STATE
+========================================================= */
+
+.walk-panel .walk-journey:hover {
+  transform: translateY(-3px);
+
+  border-color:
+          rgba(242, 107, 66, 0.85);
+
+  background:
+          linear-gradient(
+                  135deg,
+                  rgba(242, 107, 66, 0.22),
+                  rgba(242, 107, 66, 0.08)
+          );
+
+  box-shadow:
+          0 14px 34px
+          rgba(0, 0, 0, 0.28),
+          inset 0 0 0 1px
+          rgba(242, 107, 66, 0.08);
+}
+
+.walk-panel .walk-journey:hover > span,
+.walk-panel .walk-journey:hover > i {
+  color:
+          rgba(242, 107, 66, 1);
+}
+
+.walk-panel .walk-journey:hover strong {
+  color:
+          rgba(255, 255, 255, 1);
+}
+
+.walk-panel .walk-journey:hover small {
+  color:
+          rgba(255, 255, 255, 0.72);
+}
+
+
+/* CURRENT / SELECTED JOURNEY */
+
+.walk-panel .walk-journey.walk-journey-active {
+  border-color:
+          rgba(242, 107, 66, 0.9);
+
+  background:
+          linear-gradient(
+                  135deg,
+                  rgba(242, 107, 66, 0.18),
+                  rgba(242, 107, 66, 0.06)
+          );
+
+  box-shadow:
+          inset 3px 0 0
+          var(--signal);
+}
+
+.walk-panel .walk-journey.walk-journey-active > span,
+.walk-panel .walk-journey.walk-journey-active > i {
+  color:
+          var(--signal);
 }

@@ -1,8 +1,14 @@
-import { NextResponse } from "next/server";
+import {
+    NextResponse,
+} from "next/server";
 
 import {
     getOpenAIClient,
 } from "../../../lib/openai";
+
+import {
+    checkAssistantRateLimit,
+} from "../../../lib/rateLimit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -17,6 +23,15 @@ type ChatMessage = {
     role: "user" | "assistant";
     content: string;
 };
+
+const MAX_USER_MESSAGE_CHARS =
+    1200;
+
+const MAX_HISTORY_MESSAGES =
+    12;
+
+const MAX_TOTAL_INPUT_CHARS =
+    12000;
 
 const BASE_INSTRUCTIONS = `
 You are MD Companion, the conversational concierge for
@@ -208,12 +223,15 @@ has actually been collected.
 Never tell the visitor their request has been submitted
 unless the website itself confirms the submission after
 your response.
+
+Keep the visible reply concise.
 `;
 
-const JOURNEYS: Record<
-    Journey,
-    string
-> = {
+const JOURNEYS:
+    Record<
+        Journey,
+        string
+    > = {
     general: `
 The visitor is currently on the open/general journey.
 Help determine what they need.
@@ -238,7 +256,8 @@ Prioritize photography, filmmaking and booking inquiries.
 const OUTPUT_SCHEMA = {
     type: "object",
 
-    additionalProperties: false,
+    additionalProperties:
+        false,
 
     required: [
         "reply",
@@ -252,9 +271,11 @@ const OUTPUT_SCHEMA = {
             type: "string",
         },
 
-        readyForConfirmation: {
-            type: "boolean",
-        },
+        readyForConfirmation:
+            {
+                type:
+                    "boolean",
+            },
 
         submissionType: {
             type: "string",
@@ -270,7 +291,8 @@ const OUTPUT_SCHEMA = {
         submission: {
             type: "object",
 
-            additionalProperties: false,
+            additionalProperties:
+                false,
 
             required: [
                 "name",
@@ -406,7 +428,8 @@ function validJourney(
     return (
         value === "general" ||
         value === "tea" ||
-        value === "mowithmd" ||
+        value ===
+        "mowithmd" ||
         value === "lords"
     );
 }
@@ -418,58 +441,162 @@ function cleanMessages(
         return [];
     }
 
-    return value
-        .filter(
-            (
-                message
-            ): message is ChatMessage => {
-                if (
-                    typeof message !==
-                    "object" ||
-                    message === null
-                ) {
-                    return false;
+    const messages =
+        value
+            .filter(
+                (
+                    message
+                ): message is ChatMessage => {
+                    if (
+                        typeof message !==
+                        "object" ||
+                        message === null
+                    ) {
+                        return false;
+                    }
+
+                    const item =
+                        message as Partial<ChatMessage>;
+
+                    return (
+                        (
+                            item.role ===
+                            "user" ||
+                            item.role ===
+                            "assistant"
+                        ) &&
+                        typeof item.content ===
+                        "string" &&
+                        item.content
+                            .trim()
+                            .length > 0
+                    );
                 }
+            )
+            .slice(
+                -MAX_HISTORY_MESSAGES
+            )
+            .map(
+                (
+                    message
+                ) => ({
+                    role:
+                    message.role,
 
-                const item =
-                    message as Partial<ChatMessage>;
+                    content:
+                        message.content
+                            .trim()
+                            .slice(
+                                0,
+                                message.role ===
+                                "user"
+                                    ? MAX_USER_MESSAGE_CHARS
+                                    : 2000
+                            ),
+                })
+            );
 
-                return (
-                    (
-                        item.role ===
-                        "user" ||
-                        item.role ===
-                        "assistant"
-                    ) &&
-                    typeof item.content ===
-                    "string" &&
-                    item.content.trim()
-                        .length > 0
-                );
-            }
-        )
-        .map((message) => ({
-            role: message.role,
-
-            content:
+    let totalChars =
+        messages.reduce(
+            (
+                total,
+                message
+            ) =>
+                total +
                 message.content
-                    .trim()
-                    .slice(0, 4000),
-        }))
-        .slice(-18);
+                    .length,
+            0
+        );
+
+    while (
+        totalChars >
+        MAX_TOTAL_INPUT_CHARS &&
+        messages.length > 2
+        ) {
+        const removed =
+            messages.shift();
+
+        totalChars -=
+            removed?.content
+                .length || 0;
+    }
+
+    return messages;
 }
 
 export async function POST(
     request: Request
 ) {
     try {
+        const rateLimit =
+            await checkAssistantRateLimit(
+                request
+            );
+
+        if (!rateLimit.allowed) {
+            return NextResponse.json(
+                {
+                    error:
+                    rateLimit.reason,
+                },
+                {
+                    status: 429,
+
+                    headers: {
+                        "Retry-After":
+                            String(
+                                rateLimit.retryAfter ||
+                                30
+                            ),
+                    },
+                }
+            );
+        }
+
         const body =
             await request.json();
 
         const journey: Journey =
-            validJourney(body?.journey)
+            validJourney(
+                body?.journey
+            )
                 ? body.journey
                 : "general";
+
+        if (
+            Array.isArray(
+                body?.messages
+            )
+        ) {
+            const lastUser =
+                [...body.messages]
+                    .reverse()
+                    .find(
+                        (
+                            message
+                        ) =>
+                            message?.role ===
+                            "user"
+                    );
+
+            if (
+                typeof lastUser?.content ===
+                "string" &&
+                lastUser.content
+                    .trim().length >
+                MAX_USER_MESSAGE_CHARS
+            ) {
+                return NextResponse.json(
+                    {
+                        error:
+                            "Keep each message under 1,200 characters so I can keep the conversation moving.",
+                    },
+                    {
+                        status: 413,
+                    }
+                );
+            }
+        }
 
         const messages =
             cleanMessages(
@@ -495,7 +622,9 @@ export async function POST(
             [...messages]
                 .reverse()
                 .find(
-                    (message) =>
+                    (
+                        message
+                    ) =>
                         message.role ===
                         "user"
                 )?.content;
@@ -513,68 +642,79 @@ export async function POST(
                 );
 
             if (
-                moderation.results[0]
+                moderation
+                    .results[0]
                     ?.flagged
             ) {
-                return NextResponse.json({
-                    reply:
-                        "I can't continue with that particular request, but I can still help with Lord's Nta10ment, Tea for Chat, MowithMD, or the rest of the website.",
+                return NextResponse.json(
+                    {
+                        reply:
+                            "I can't continue with that particular request, but I can still help with Lord's Nta10ment, Tea for Chat, MowithMD, or the rest of the website.",
 
-                    readyForConfirmation:
-                        false,
+                        readyForConfirmation:
+                            false,
 
-                    submissionType:
-                        "none",
+                        submissionType:
+                            "none",
 
-                    submission: null,
-                });
+                        submission:
+                            null,
+                    }
+                );
             }
         }
 
         const response =
-            await client.responses.create({
-                model:
-                    process.env
-                        .OPENAI_MODEL ||
-                    "gpt-5.6-luna",
+            await client.responses.create(
+                {
+                    model:
+                        process.env
+                            .OPENAI_MODEL ||
+                        "gpt-5.6-luna",
 
-                store: false,
+                    store: false,
 
-                instructions: `
+                    instructions: `
 ${BASE_INSTRUCTIONS}
 
 CURRENT JOURNEY:
 
 ${JOURNEYS[journey]}
-                `,
+                    `,
 
-                input: messages.map(
-                    (message) => ({
-                        role:
-                        message.role,
+                    input:
+                        messages.map(
+                            (
+                                message
+                            ) => ({
+                                role:
+                                message.role,
 
-                        content:
-                        message.content,
-                    })
-                ),
+                                content:
+                                message.content,
+                            })
+                        ),
 
-                text: {
-                    format: {
-                        type:
-                            "json_schema",
+                    text: {
+                        format: {
+                            type:
+                                "json_schema",
 
-                        name:
-                            "md_companion_response",
+                            name:
+                                "md_companion_response",
 
-                        strict: true,
+                            strict:
+                                true,
 
-                        schema:
-                        OUTPUT_SCHEMA,
+                            schema:
+                            OUTPUT_SCHEMA,
+                        },
                     },
-                },
 
-                max_output_tokens: 900,
-            });
+                    max_output_tokens:
+                        600,
+                }
+            );
 
         const output =
             response.output_text;
@@ -589,7 +729,13 @@ ${JOURNEYS[journey]}
             JSON.parse(output);
 
         return NextResponse.json(
-            parsed
+            parsed,
+            {
+                headers: {
+                    "Cache-Control":
+                        "no-store",
+                },
+            }
         );
     } catch (error) {
         console.error(

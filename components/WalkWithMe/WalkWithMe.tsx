@@ -736,6 +736,7 @@ export default function WalkWithMe() {
                 >
                     <div className="walk-input-wrap">
                         <textarea
+
                             ref={
                                 inputRef
                             }
@@ -760,6 +761,7 @@ export default function WalkWithMe() {
                             }
                             placeholder="What's on your mind?"
                             aria-label="Message MD Companion"
+
                         />
 
                         <span>
