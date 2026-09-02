@@ -424,10 +424,25 @@ export async function POST(
             error
         );
 
+        const awsError =
+            error instanceof Error
+                ? error
+                : new Error(
+                    "Unknown AWS error"
+                );
+
         return NextResponse.json(
             {
                 error:
                     "We couldn't send the request just now. Please try again.",
+
+                diagnostic: {
+                    name:
+                    awsError.name,
+
+                    message:
+                    awsError.message,
+                },
             },
             {
                 status: 500,
