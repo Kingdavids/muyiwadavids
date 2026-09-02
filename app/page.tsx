@@ -1,6 +1,7 @@
 "use client";
 import WalkWithMe from "../components/WalkWithMe/WalkWithMe";
-import Image from "next/image";
+import MainHero from "../components/MainHero/MainHero";
+import LordsNta10mentSection from "@/components/LordsNta10ment/LordsNta10mentSection";
 import {
   useEffect,
   useRef,
@@ -26,7 +27,7 @@ const SITE = {
    LORD'S NTA10MENT IMAGES
 ========================================================= */
 
-const LORDS_IMAGES = [
+const lordsImages = [
   "/images/lords/lords-01.jpg",
   "/images/lords/lords-02.jpg",
   "/images/lords/lords-03.jpg",
@@ -46,6 +47,23 @@ const LORDS_IMAGES = [
   "/images/lords/lords-17.jpg",
   "/images/lords/lords-18.jpg",
   "/images/lords/lords-19.jpg",
+  "/images/lords/lords-20.jpg",
+  "/images/lords/lords-21.jpg",
+  "/images/lords/lords-22.jpg",
+  "/images/lords/lords-23.jpg",
+  "/images/lords/lords-24.jpg",
+  "/images/lords/lords-25.jpg",
+  "/images/lords/lords-26.jpg",
+  "/images/lords/lords-27.jpg",
+  "/images/lords/lords-28.jpg",
+  "/images/lords/lords-29.jpg",
+  "/images/lords/lords-30.jpg",
+  "/images/lords/lords-31.jpg",
+  "/images/lords/lords-32.jpg",
+  "/images/lords/lords-33.jpg",
+  "/images/lords/lords-34.jpg",
+  "/images/lords/lords-35.jpg",
+  "/images/lords/lords-36.jpg",
 ];
 
 /* =========================================================
@@ -205,7 +223,7 @@ export default function Home() {
 
       setLordImage(
           (lordImage + 1) %
-          LORDS_IMAGES.length
+          lordsImages.length
       );
     }, 4500);
 
@@ -439,20 +457,6 @@ export default function Home() {
      LORD'S MANUAL SLIDE CHANGE
   ===================================================== */
 
-  const changeLordImage = (
-      index: number
-  ) => {
-    if (index === lordImage) {
-      return;
-    }
-
-    setPreviousLordImage(lordImage);
-
-    setLordImageReady(false);
-
-    setLordImage(index);
-  };
-
   const handleOutbound = (
       event: ReactMouseEvent<HTMLAnchorElement>,
       href: string,
@@ -612,281 +616,282 @@ export default function Home() {
                 HERO
             ================================================= */}
 
-        <section
-            id="top"
-            className="hero shell"
-        >
-          <div className="hero-copy">
-            <div className="hero-meta reveal r1">
-                        <span>
-                            CREATIVE TECHNOLOGIST
-                        </span>
-
-              <i />
-
-              <span>
-                            VISUAL STORYTELLER
-                        </span>
-            </div>
-
-            <h1 className="reveal r2">
-              Something
-              <br />
+        {/*<section*/}
+        {/*    id="top"*/}
+        {/*    className="hero shell"*/}
+        {/*>*/}
+        {/*  <div className="hero-copy">*/}
+        {/*    <div className="hero-meta reveal r1">*/}
+        {/*                <span>*/}
+        {/*                    CREATIVE TECHNOLOGIST*/}
+        {/*                </span>*/}
+
+        {/*      <i />*/}
+
+        {/*      <span>*/}
+        {/*                    VISUAL STORYTELLER*/}
+        {/*                </span>*/}
+        {/*    </div>*/}
+
+        {/*    <h1 className="reveal r2">*/}
+        {/*      Something*/}
+        {/*      <br />*/}
 
-              <em>
-                remarkable
-              </em>
+        {/*      <em>*/}
+        {/*        remarkable*/}
+        {/*      </em>*/}
 
-              <br />
+        {/*      <br />*/}
 
-              is being built.
-            </h1>
-
-            <div className="hero-bottom reveal r3">
-              <p>
-                Media. Technology.
-                Podcast.
-                <br />
+        {/*      is being built.*/}
+        {/*    </h1>*/}
+
+        {/*    <div className="hero-bottom reveal r3">*/}
+        {/*      <p>*/}
+        {/*        Media. Technology.*/}
+        {/*        Podcast.*/}
+        {/*        <br />*/}
 
-                One digital home by
-                Muyiwa Davids.
-              </p>
+        {/*        One digital home by*/}
+        {/*        Muyiwa Davids.*/}
+        {/*      </p>*/}
 
-              <div className="hero-actions">
-                <a
-                    href="#worlds"
-                    className="main-button"
-                    data-cursor="EXPLORE"
-                >
-                  EXPLORE MY WORLD
-
-                  <span>
-                                    ↓
-                                </span>
-                </a>
-
-                <a
-                    href="#walk-with-me"
-                    className="secondary-link"
-                    data-cursor="BOOK"
-                    data-walk-mode="lords"
-                >
-                  Book Lord&apos;s Nta10ment ↗
-                </a>
-
-              </div>
-            </div>
-          </div>
-
-          {/* =============================================
-                    CONSTRUCTION PANEL
-                ============================================= */}
-
-          <div className="construction reveal r4">
-            <div className="construction-grid" />
-
-            <div className="construction-scan" />
-
-            <div className="construction-top">
-                        <span>
-                            MD.SYSTEM
-                        </span>
-
-              <span>
-                            SITE BUILD
-
-                            <i />
-
-                            ACTIVE
-                        </span>
-            </div>
-
-            <div className="construction-stamp">
-              <small>
-                STATUS
-              </small>
-
-              <strong>
-                UNDER
-                <br />
-
-                CONSTRUCTION
-              </strong>
-
-              <span>
-                            EST. 2026
-                        </span>
-            </div>
-
-            <div className="scaffold scaffold-one" />
-
-            <div className="scaffold scaffold-two" />
-
-            <div className="scaffold scaffold-three" />
-
-            <div className="scaffold scaffold-four" />
-
-            <div className="construction-orbit">
-              <div className="orbit-ring orbit-a" />
-
-              <div className="orbit-ring orbit-b" />
-
-              <div className="orbit-ring orbit-c" />
-
-              <div className="orbit-center">
-                <strong>
-                  MD
-                </strong>
-
-                <span>
-                                BUILD
-                            </span>
-              </div>
-
-              <span className="orbit-tag tag-media">
-                            MEDIA
-                        </span>
-
-              <span className="orbit-tag tag-code">
-                            CODE
-                        </span>
+        {/*      <div className="hero-actions">*/}
+        {/*        <a*/}
+        {/*            href="#worlds"*/}
+        {/*            className="main-button"*/}
+        {/*            data-cursor="EXPLORE"*/}
+        {/*        >*/}
+        {/*          EXPLORE MY WORLD*/}
+
+        {/*          <span>*/}
+        {/*                            ↓*/}
+        {/*                        </span>*/}
+        {/*        </a>*/}
+
+        {/*        <a*/}
+        {/*            href="#walk-with-me"*/}
+        {/*            className="secondary-link"*/}
+        {/*            data-cursor="BOOK"*/}
+        {/*            data-walk-mode="lords"*/}
+        {/*        >*/}
+        {/*          Book Lord&apos;s Nta10ment ↗*/}
+        {/*        </a>*/}
+
+        {/*      </div>*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
+
+        {/*  /!* =============================================*/}
+        {/*            CONSTRUCTION PANEL*/}
+        {/*        ============================================= *!/*/}
+
+        {/*  <div className="construction reveal r4">*/}
+        {/*    <div className="construction-grid" />*/}
+
+        {/*    <div className="construction-scan" />*/}
+
+        {/*    <div className="construction-top">*/}
+        {/*                <span>*/}
+        {/*                    MD.SYSTEM*/}
+        {/*                </span>*/}
+
+        {/*      <span>*/}
+        {/*                    SITE BUILD*/}
+
+        {/*                    <i />*/}
+
+        {/*                    ACTIVE*/}
+        {/*                </span>*/}
+        {/*    </div>*/}
+
+        {/*    <div className="construction-stamp">*/}
+        {/*      <small>*/}
+        {/*        STATUS*/}
+        {/*      </small>*/}
+
+        {/*      <strong>*/}
+        {/*        UNDER*/}
+        {/*        <br />*/}
+
+        {/*        CONSTRUCTION*/}
+        {/*      </strong>*/}
+
+        {/*      <span>*/}
+        {/*                    EST. 2026*/}
+        {/*                </span>*/}
+        {/*    </div>*/}
+
+        {/*    <div className="scaffold scaffold-one" />*/}
+
+        {/*    <div className="scaffold scaffold-two" />*/}
+
+        {/*    <div className="scaffold scaffold-three" />*/}
+
+        {/*    <div className="scaffold scaffold-four" />*/}
+
+        {/*    <div className="construction-orbit">*/}
+        {/*      <div className="orbit-ring orbit-a" />*/}
+
+        {/*      <div className="orbit-ring orbit-b" />*/}
+
+        {/*      <div className="orbit-ring orbit-c" />*/}
+
+        {/*      <div className="orbit-center">*/}
+        {/*        <strong>*/}
+        {/*          MD*/}
+        {/*        </strong>*/}
+
+        {/*        <span>*/}
+        {/*                        BUILD*/}
+        {/*                    </span>*/}
+        {/*      </div>*/}
+
+        {/*      <span className="orbit-tag tag-media">*/}
+        {/*                    MEDIA*/}
+        {/*                </span>*/}
+
+        {/*      <span className="orbit-tag tag-code">*/}
+        {/*                    CODE*/}
+        {/*                </span>*/}
+
+        {/*      <span className="orbit-tag tag-film">*/}
+        {/*                    FILM*/}
+        {/*                </span>*/}
+
+        {/*      <span className="orbit-tag tag-podcast">*/}
+        {/*                    AUDIO*/}
+        {/*                </span>*/}
+        {/*    </div>*/}
 
-              <span className="orbit-tag tag-film">
-                            FILM
-                        </span>
+        {/*    <div className="build-data">*/}
+        {/*      <div>*/}
+        {/*                    <span>*/}
+        {/*                        UI*/}
+        {/*                    </span>*/}
 
-              <span className="orbit-tag tag-podcast">
-                            AUDIO
-                        </span>
-            </div>
+        {/*        <strong>*/}
+        {/*          87%*/}
+        {/*        </strong>*/}
+        {/*      </div>*/}
 
-            <div className="build-data">
-              <div>
-                            <span>
-                                UI
-                            </span>
+        {/*      <div>*/}
+        {/*                    <span>*/}
+        {/*                        MEDIA*/}
+        {/*                    </span>*/}
 
-                <strong>
-                  87%
-                </strong>
-              </div>
+        {/*        <strong>*/}
+        {/*          74%*/}
+        {/*        </strong>*/}
+        {/*      </div>*/}
 
-              <div>
-                            <span>
-                                MEDIA
-                            </span>
+        {/*      <div>*/}
+        {/*                    <span>*/}
+        {/*                        TECH*/}
+        {/*                    </span>*/}
 
-                <strong>
-                  74%
-                </strong>
-              </div>
+        {/*        <strong>*/}
+        {/*          92%*/}
+        {/*        </strong>*/}
+        {/*      </div>*/}
+        {/*    </div>*/}
 
-              <div>
-                            <span>
-                                TECH
-                            </span>
+        {/*    <div className="build-progress">*/}
+        {/*      <div>*/}
+        {/*                    <span>*/}
+        {/*                        BUILD PROGRESS*/}
+        {/*                    </span>*/}
 
-                <strong>
-                  92%
-                </strong>
-              </div>
-            </div>
+        {/*        <strong>*/}
+        {/*          78%*/}
+        {/*        </strong>*/}
+        {/*      </div>*/}
 
-            <div className="build-progress">
-              <div>
-                            <span>
-                                BUILD PROGRESS
-                            </span>
+        {/*      <div className="progress-track">*/}
+        {/*        <span />*/}
+        {/*      </div>*/}
+        {/*    </div>*/}
 
-                <strong>
-                  78%
-                </strong>
-              </div>
+        {/*    <div className="construction-footer">*/}
+        {/*                <span>*/}
+        {/*                    TORONTO / CANADA*/}
+        {/*                </span>*/}
 
-              <div className="progress-track">
-                <span />
-              </div>
-            </div>
+        {/*      <span>*/}
+        {/*                    BUILDING IN PUBLIC*/}
+        {/*                </span>*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
+        {/*</section>*/}
+        <MainHero />
 
-            <div className="construction-footer">
-                        <span>
-                            TORONTO / CANADA
-                        </span>
+        {/*/!* =================================================*/}
+        {/*        CONSTRUCTION STRIP*/}
+        {/*    ================================================= *!/*/}
 
-              <span>
-                            BUILDING IN PUBLIC
-                        </span>
-            </div>
-          </div>
-        </section>
+        {/*<div className="caution-strip">*/}
+        {/*  <div>*/}
+        {/*            <span>*/}
+        {/*                UNDER CONSTRUCTION*/}
+        {/*            </span>*/}
 
-        {/* =================================================
-                CONSTRUCTION STRIP
-            ================================================= */}
+        {/*    <i>{"///"}</i>*/}
 
-        <div className="caution-strip">
-          <div>
-                    <span>
-                        UNDER CONSTRUCTION
-                    </span>
+        {/*    <span>*/}
+        {/*                CREATIVE SYSTEM ACTIVE*/}
+        {/*            </span>*/}
 
-            <i>{"///"}</i>
+        {/*    <i>{"///"}</i>*/}
 
-            <span>
-                        CREATIVE SYSTEM ACTIVE
-                    </span>
+        {/*    <span>*/}
+        {/*                MEDIA*/}
+        {/*            </span>*/}
 
-            <i>{"///"}</i>
+        {/*    <i>{"///"}</i>*/}
 
-            <span>
-                        MEDIA
-                    </span>
+        {/*    <span>*/}
+        {/*                TECH*/}
+        {/*            </span>*/}
 
-            <i>{"///"}</i>
+        {/*    <i>{"///"}</i>*/}
 
-            <span>
-                        TECH
-                    </span>
+        {/*    <span>*/}
+        {/*                PODCAST*/}
+        {/*            </span>*/}
 
-            <i>{"///"}</i>
+        {/*    <i>{"///"}</i>*/}
 
-            <span>
-                        PODCAST
-                    </span>
+        {/*    <span>*/}
+        {/*                UNDER CONSTRUCTION*/}
+        {/*            </span>*/}
 
-            <i>{"///"}</i>
+        {/*    <i>{"///"}</i>*/}
 
-            <span>
-                        UNDER CONSTRUCTION
-                    </span>
+        {/*    <span>*/}
+        {/*                CREATIVE SYSTEM ACTIVE*/}
+        {/*            </span>*/}
 
-            <i>{"///"}</i>
+        {/*    <i>{"///"}</i>*/}
 
-            <span>
-                        CREATIVE SYSTEM ACTIVE
-                    </span>
+        {/*    <span>*/}
+        {/*                MEDIA*/}
+        {/*            </span>*/}
 
-            <i>{"///"}</i>
+        {/*    <i>{"///"}</i>*/}
 
-            <span>
-                        MEDIA
-                    </span>
+        {/*    <span>*/}
+        {/*                TECH*/}
+        {/*            </span>*/}
 
-            <i>{"///"}</i>
+        {/*    <i>{"///"}</i>*/}
 
-            <span>
-                        TECH
-                    </span>
+        {/*    <span>*/}
+        {/*                PODCAST*/}
+        {/*            </span>*/}
 
-            <i>{"///"}</i>
-
-            <span>
-                        PODCAST
-                    </span>
-
-            <i>{"///"}</i>
-          </div>
-        </div>
+        {/*    <i>{"///"}</i>*/}
+        {/*  </div>*/}
+        {/*</div>*/}
 
         {/* =================================================
                 WORLDS
@@ -1350,167 +1355,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* =================================================
-                LORD'S NTA10MENT
-            ================================================= */}
-
-        <section
-            ref={lordsRef}
-            className="lords shell"
-        >
-          <div className="lords-card">
-            <div className="lords-slides">
-              <div className="lords-image-placeholder">
-                <span>LN</span>
-              </div>
-
-              {lordsVisible &&
-                  previousLordImage !== null && (
-                      <div
-                          className={`
-                            lords-image
-                            lords-image-previous
-                            ${
-                              lordImageReady
-                                  ? "lords-image-fade-out"
-                                  : ""
-                          }
-                        `}
-                      >
-                        <Image
-                            src={
-                              LORDS_IMAGES[
-                                  previousLordImage
-                                  ]
-                            }
-                            alt=""
-                            fill
-                            quality={78}
-                            sizes="
-                                (max-width: 760px) 100vw,
-                                (max-width: 1500px) calc(100vw - 72px),
-                                1420px
-                            "
-                            className="lords-photo"
-                        />
-                      </div>
-                  )}
-
-              {lordsVisible && (
-                  <div
-                      className={`
-                        lords-image
-                        lords-image-current
-                        ${
-                          lordImageReady
-                              ? "lords-image-active"
-                              : ""
-                      }
-                    `}
-                  >
-                    <Image
-                        key={LORDS_IMAGES[lordImage]}
-                        src={LORDS_IMAGES[lordImage]}
-                        alt=""
-                        fill
-                        quality={78}
-                        sizes="
-                            (max-width: 760px) 100vw,
-                            (max-width: 1500px) calc(100vw - 72px),
-                            1420px
-                        "
-                        className="lords-photo"
-                        onLoad={() => {
-                          setLordImageReady(true);
-                        }}
-                    />
-                  </div>
-              )}
-            </div>
-
-            <div className="lords-overlay" />
-
-            <div className="lords-film-lines" />
-
-            <div className="lords-top">
-            <span>
-                02 / LORD&apos;S NTA10MENT
-            </span>
-
-              <span>
-                TORONTO + BEYOND
-            </span>
-            </div>
-
-            <div className="lords-counter">
-              <strong>
-                {String(
-                    lordImage + 1
-                ).padStart(2, "0")}
-              </strong>
-
-              <span>
-                /{" "}
-                {String(
-                    LORDS_IMAGES.length
-                ).padStart(2, "0")}
-            </span>
-            </div>
-
-            <div className="lords-copy">
-            <span>
-                CREATIVE MEDIA HOUSE
-            </span>
-
-              <h2>
-                Cinematic.
-                <br />
-
-                High End.
-                <br />
-
-                <em>
-                  Classy.
-                </em>
-              </h2>
-
-              <p>
-                Toronto & GTA Weddings • Events •
-                Portraits • Cinematic Film
-              </p>
-            </div>
-
-            <div className="lords-dots">
-              {LORDS_IMAGES.map((_, index) => (
-                  <button
-                      key={index}
-                      type="button"
-                      className={
-                        lordImage === index
-                            ? "active"
-                            : ""
-                      }
-                      onClick={() =>
-                          changeLordImage(index)
-                      }
-                      aria-label={`Show Lord's Nta10ment image ${
-                          index + 1
-                      }`}
-                  />
-              ))}
-            </div>
-
-            <a
-                href="#walk-with-me"
-                className="booking-circle"
-                data-cursor="BOOK"
-                data-walk-mode="lords"
-            >
-              <span>BOOK ME</span>
-              <strong>↗</strong>
-            </a>
-          </div>
-        </section>
+        <LordsNta10mentSection
+          images={lordsImages}
+        />
+        <WalkWithMe />
 
         {/* =================================================
                 FOOTER
@@ -1580,7 +1428,6 @@ export default function Home() {
             MUYIWA DAVIDS
                 </span>
         </footer>
-        <WalkWithMe />
       </main>
   );
 }

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+
 
 /* =========================================================
    MUYIWA DAVIDS
@@ -2141,7 +2141,6 @@ button {
 }
 
 /* =========================================================
-  /* =========================================================
    TECH CARD
    LIVE DEVELOPMENT ENVIRONMENT
 ========================================================= */
@@ -3452,702 +3451,6 @@ button {
 }
 
 /* =========================================================
-   LORD'S NTA10MENT
-========================================================= */
-
-/* =========================================================
-   LORD'S NTA10MENT
-========================================================= */
-
-.lords {
-  margin-top: 90px;
-  margin-bottom: 80px;
-}
-
-.lords-card {
-  position: relative;
-
-  min-height: 500px;
-
-  overflow: hidden;
-
-  border: 1px solid var(--line);
-
-  background: #14090d;
-
-  isolation: isolate;
-}
-
-/* =========================================================
-   IMAGE SLIDESHOW
-========================================================= */
-
-.lords-slides {
-  position: absolute;
-
-  inset: 0;
-
-  z-index: -4;
-
-  overflow: hidden;
-
-  background: #14090d;
-}
-
-.lords-image {
-  position: absolute;
-
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  overflow: hidden;
-
-  opacity: 0;
-
-  transform: scale(1.055);
-
-  transition:
-          opacity 1.25s ease,
-          transform 6s cubic-bezier(
-                  0.16,
-                  1,
-                  0.3,
-                  1
-          );
-
-  will-change:
-          opacity,
-          transform;
-}
-
-.lords-photo {
-  position: absolute;
-
-  inset: 0;
-
-  width: 100% !important;
-  height: 100% !important;
-
-  max-width: none !important;
-
-  object-fit: cover !important;
-
-  /*
-     35% keeps faces/subjects slightly higher
-     in wedding and portrait photographs.
-  */
-  object-position: center 35% !important;
-
-  user-select: none;
-
-  pointer-events: none;
-}
-
-/* Previous photo remains visible while
-   next photo finishes loading */
-
-.lords-image-previous {
-  z-index: 1;
-
-  opacity: 1;
-
-  transform: scale(1.025);
-}
-
-/* Incoming frame */
-
-.lords-image-current {
-  z-index: 2;
-
-  opacity: 0;
-
-  transform: scale(1.055);
-}
-
-.lords-image-current.lords-image-active {
-  opacity: 1;
-
-  transform: scale(1);
-}
-
-.lords-image-previous.lords-image-fade-out {
-  opacity: 0;
-
-  transform: scale(1);
-}
-
-/* =========================================================
-   IMAGE PLACEHOLDER
-========================================================= */
-
-.lords-image-placeholder {
-  position: absolute;
-
-  inset: 0;
-
-  z-index: 0;
-
-  display: grid;
-  place-items: center;
-
-  overflow: hidden;
-
-  background:
-          radial-gradient(
-                  circle at 72% 25%,
-                  rgba(242, 107, 66, 0.18),
-                  transparent 28rem
-          ),
-          linear-gradient(
-                  145deg,
-                  #35131c,
-                  #090a0b
-          );
-}
-
-.lords-image-placeholder::before {
-  content: "";
-
-  position: absolute;
-
-  inset: 0;
-
-  opacity: 0.07;
-
-  background-image:
-          linear-gradient(
-                  rgba(255, 255, 255, 0.15) 1px,
-                  transparent 1px
-          ),
-          linear-gradient(
-                  90deg,
-                  rgba(255, 255, 255, 0.15) 1px,
-                  transparent 1px
-          );
-
-  background-size: 45px 45px;
-}
-
-.lords-image-placeholder span {
-  font-family:
-          var(--font-display),
-          sans-serif;
-
-  font-size:
-          clamp(
-                  9rem,
-                  21vw,
-                  20rem
-          );
-
-  font-weight: 800;
-
-  line-height: 1;
-
-  letter-spacing: -0.1em;
-
-  color:
-          rgba(
-                  244,
-                  240,
-                  232,
-                  0.025
-          );
-}
-
-/* =========================================================
-   CINEMATIC OVERLAYS
-========================================================= */
-
-.lords-overlay {
-  position: absolute;
-
-  inset: 0;
-
-  z-index: -2;
-
-  pointer-events: none;
-
-  background:
-          linear-gradient(
-                  90deg,
-                  rgba(6, 6, 7, 0.86) 0%,
-                  rgba(6, 6, 7, 0.56) 42%,
-                  rgba(6, 6, 7, 0.15) 75%,
-                  rgba(6, 6, 7, 0.28) 100%
-          ),
-          linear-gradient(
-                  to top,
-                  rgba(6, 6, 7, 0.58),
-                  transparent 55%
-          );
-}
-
-.lords-film-lines {
-  position: absolute;
-
-  inset: 0;
-
-  z-index: -1;
-
-  pointer-events: none;
-
-  opacity: 0.08;
-
-  background:
-          repeating-linear-gradient(
-                  to bottom,
-                  transparent 0px,
-                  transparent 3px,
-                  rgba(255, 255, 255, 0.08) 4px
-          );
-
-  animation:
-          filmFlicker 5s linear infinite;
-}
-
-/* =========================================================
-   TOP METADATA
-========================================================= */
-
-.lords-top {
-  position: absolute;
-
-  left: 28px;
-  right: 28px;
-  top: 26px;
-
-  z-index: 5;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 20px;
-
-  font-family:
-          var(--font-mono),
-          monospace;
-
-  font-size: 0.62rem;
-
-  letter-spacing: 0.14em;
-
-  color:
-          rgba(
-                  244,
-                  240,
-                  232,
-                  0.7
-          );
-}
-
-/* =========================================================
-   IMAGE COUNTER
-========================================================= */
-
-.lords-counter {
-  position: absolute;
-
-  right: 30px;
-  top: 76px;
-
-  z-index: 5;
-
-  display: flex;
-
-  align-items: baseline;
-
-  gap: 4px;
-
-  font-family:
-          var(--font-mono),
-          monospace;
-}
-
-.lords-counter strong {
-  font-family:
-          var(--font-display),
-          sans-serif;
-
-  font-size: 2.3rem;
-
-  font-weight: 600;
-
-  letter-spacing: -0.06em;
-
-  color: var(--paper);
-}
-
-.lords-counter span {
-  font-size: 0.6rem;
-
-  color:
-          rgba(
-                  244,
-                  240,
-                  232,
-                  0.45
-          );
-}
-
-/* =========================================================
-   COPY
-========================================================= */
-
-.lords-copy {
-  position: absolute;
-
-  left: clamp(
-          28px,
-          5vw,
-          70px
-  );
-
-  bottom: clamp(
-          40px,
-          7vw,
-          70px
-  );
-
-  z-index: 5;
-
-  max-width: 620px;
-}
-
-.lords-copy > span {
-  display: block;
-
-  margin-bottom: 14px;
-
-  font-family:
-          var(--font-mono),
-          monospace;
-
-  font-size: 0.6rem;
-
-  letter-spacing: 0.16em;
-
-  color: var(--signal);
-}
-
-.lords-copy h2 {
-  margin: 0;
-
-  font-family:
-          var(--font-display),
-          sans-serif;
-
-  font-size:
-          clamp(
-                  3rem,
-                  6vw,
-                  6rem
-          );
-
-  font-weight: 600;
-
-  line-height: 0.88;
-
-  letter-spacing: -0.065em;
-
-  color: var(--paper);
-}
-
-.lords-copy h2 em {
-  font-style: normal;
-
-  color: var(--signal);
-}
-
-.lords-copy p {
-  margin-top: 22px;
-  margin-bottom: 0;
-
-  font-family:
-          var(--font-sans),
-          sans-serif;
-
-  font-size: 0.82rem;
-
-  line-height: 1.6;
-
-  color:
-          rgba(
-                  244,
-                  240,
-                  232,
-                  0.72
-          );
-}
-
-/* =========================================================
-   SLIDE DOTS
-========================================================= */
-
-.lords-dots {
-  position: absolute;
-
-  left: 50%;
-
-  bottom: 26px;
-
-  z-index: 8;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 5px;
-
-  transform: translateX(-50%);
-}
-
-.lords-dots button {
-  width: 18px;
-  height: 3px;
-
-  padding: 0;
-
-  border: 0;
-
-  background:
-          rgba(
-                  244,
-                  240,
-                  232,
-                  0.25
-          );
-
-  cursor: pointer;
-
-  transition:
-          width 300ms ease,
-          background 300ms ease;
-}
-
-.lords-dots button:hover {
-  background:
-          rgba(
-                  244,
-                  240,
-                  232,
-                  0.65
-          );
-}
-
-.lords-dots button.active {
-  width: 38px;
-
-  background: var(--signal);
-}
-
-/* =========================================================
-   BOOK BUTTON
-========================================================= */
-
-.booking-circle {
-  position: absolute;
-
-  right: clamp(
-          28px,
-          5vw,
-          65px
-  );
-
-  bottom: clamp(
-          38px,
-          6vw,
-          65px
-  );
-
-  z-index: 8;
-
-  width: 112px;
-  height: 112px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 5px;
-
-  border-radius: 50%;
-
-  background: var(--signal);
-
-  color: var(--bg);
-
-  text-decoration: none;
-
-  transition:
-          transform 450ms cubic-bezier(
-                  0.16,
-                  1,
-                  0.3,
-                  1
-          ),
-          background 300ms ease;
-}
-
-.booking-circle span {
-  font-family:
-          var(--font-mono),
-          monospace;
-
-  font-size: 0.55rem;
-
-  font-weight: 600;
-
-  letter-spacing: 0.1em;
-}
-
-.booking-circle strong {
-  font-size: 1.3rem;
-
-  font-weight: 400;
-}
-
-.booking-circle:hover {
-  transform:
-          scale(1.08)
-          rotate(-6deg);
-
-  background: var(--paper);
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 760px) {
-  .lords {
-    margin-top: 60px;
-    margin-bottom: 60px;
-  }
-
-  .lords-card {
-    min-height: 610px;
-  }
-
-  .lords-photo {
-    object-position:
-            center center !important;
-  }
-
-  .lords-overlay {
-    background:
-            linear-gradient(
-                    to top,
-                    rgba(6, 6, 7, 0.94) 0%,
-                    rgba(6, 6, 7, 0.72) 42%,
-                    rgba(6, 6, 7, 0.12) 78%
-            );
-  }
-
-  .lords-top {
-    left: 20px;
-    right: 20px;
-    top: 20px;
-
-    font-size: 0.5rem;
-  }
-
-  .lords-counter {
-    right: 20px;
-    top: 65px;
-  }
-
-  .lords-copy {
-    left: 22px;
-    right: 22px;
-
-    bottom: 110px;
-
-    max-width: 100%;
-  }
-
-  .lords-copy h2 {
-    font-size:
-            clamp(
-                    3.3rem,
-                    15vw,
-                    5rem
-            );
-  }
-
-  .lords-copy p {
-    max-width: 330px;
-
-    font-size: 0.75rem;
-  }
-
-  .booking-circle {
-    right: 20px;
-    bottom: 22px;
-
-    width: 82px;
-    height: 82px;
-  }
-
-  .booking-circle span {
-    font-size: 0.44rem;
-  }
-
-  .lords-dots {
-    left: 20px;
-    bottom: 36px;
-
-    transform: none;
-
-    max-width: calc(
-            100% - 125px
-    );
-
-    flex-wrap: wrap;
-  }
-
-  .lords-dots button {
-    width: 11px;
-  }
-
-  .lords-dots button.active {
-    width: 25px;
-  }
-}
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (
-prefers-reduced-motion: reduce
-) {
-  .lords-image {
-    transition:
-            opacity 300ms ease;
-
-    transform: none;
-  }
-
-  .lords-image-current,
-  .lords-image-current.lords-image-active,
-  .lords-image-previous {
-    transform: none;
-  }
-
-  .lords-film-lines {
-    animation: none;
-  }
-}
-
-/* =========================================================
    FOOTER
 ========================================================= */
 
@@ -4572,50 +3875,8 @@ prefers-reduced-motion: reduce
     font-size: 3.8rem;
   }
 
-  .lords {
-    padding-bottom: 85px;
-  }
-
-  .lords-card {
-    min-height: 610px;
-  }
-
-  .lords-overlay {
-    background:
-            linear-gradient(
-                    to bottom,
-                    rgba(11, 5, 8, 0.25),
-                    rgba(11, 5, 8, 0.9)
-            );
-  }
-
-  .lords-counter {
-    right: 27px;
-  }
-
-  .lords-dots {
-    right: 27px;
-  }
-
-  .lords-copy {
-    left: 27px;
-    right: 27px;
-
-    bottom: 182px;
-  }
-
   .lords-copy h2 {
     font-size: 4rem;
-  }
-
-  .booking-circle {
-    left: 27px;
-    right: auto;
-
-    bottom: 27px;
-
-    width: 130px;
-    height: 130px;
   }
 
   .footer {
@@ -4685,9 +3946,6 @@ prefers-reduced-motion: reduce
     opacity: 0.68;
   }
 
-  .lords-copy h2 {
-    font-size: 3.5rem;
-  }
 }
 
 /* =========================================================
@@ -6303,7 +5561,6 @@ pointer: coarse
         minmax(0, 1fr)
         auto
         auto;
-  }
 
     border-left: 0;
   }
@@ -6316,7 +5573,6 @@ pointer: coarse
             16px;
   }
 
-@media (max-width: 760px) {
   .walk-journeys {
     padding: 12px;
 
@@ -6333,9 +5589,9 @@ pointer: coarse
             14px;
 
     grid-template-columns:
-            auto
-            1fr
-            auto;
+        auto
+        1fr
+        auto;
   }
 
   .walk-journey > span {
@@ -6355,7 +5611,6 @@ pointer: coarse
   .walk-journey small {
     font-size: 0.24rem;
   }
-}
 
   .walk-messages {
     padding: 18px 14px;
@@ -6370,9 +5625,13 @@ pointer: coarse
   .walk-composer {
     padding: 10px;
 
-    padding-bottom: max(10px,env(safe-area-inset-bottom)
+    padding-bottom:
+            max(
+                    10px,
+                    env(safe-area-inset-bottom)
             );
   }
+}
 
 /* =========================================================
  WALK WITH ME — CURSOR OVERRIDE
@@ -6429,7 +5688,6 @@ pointer: coarse
     flex-shrink: 0;
   }
 }
-
 
 
 /* =========================================================
@@ -6532,10 +5790,6 @@ prefers-reduced-motion: reduce
   .wave i,
   .tech-scan,
   .construction-scan,
-  .lords-film-lines {
-    animation: none !important;
-  }
-
   .outbound-transition {
     transition:
             opacity
@@ -6627,10 +5881,6 @@ button:focus-visible {
   .social-orbit,
   .main-button span,
   .hero h1 em::after,
-  .lords-film-lines {
-    animation: none;
-  }
-
   .world-card {
     transform: none;
   }
@@ -7189,5 +6439,3383 @@ button:focus-visible {
 
   .walk-foot {
     flex-shrink: 0;
+  }
+}
+
+/* =========================================================
+   MAIN HERO V3 — SLEEK / CLEAN / HIGH-ENERGY
+========================================================= */
+
+.main-hero {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+
+  background:
+          radial-gradient(
+                  circle at 74% 38%,
+                  rgba(242, 107, 66, 0.08),
+                  transparent 30%
+          ),
+          radial-gradient(
+                  circle at 18% 16%,
+                  rgba(255, 255, 255, 0.02),
+                  transparent 22%
+          ),
+          #08090a;
+
+  color: var(--paper);
+}
+
+.main-hero-noise,
+.main-hero-grid,
+.main-hero-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.main-hero-noise {
+  opacity: 0.04;
+
+  background-image:
+          url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
+}
+
+.main-hero-grid {
+  opacity: 0.035;
+
+  background-image:
+          linear-gradient(
+                  rgba(244, 240, 232, 0.16) 1px,
+                  transparent 1px
+          ),
+          linear-gradient(
+                  90deg,
+                  rgba(244, 240, 232, 0.16) 1px,
+                  transparent 1px
+          );
+
+  background-size: 52px 52px;
+
+  mask-image:
+          linear-gradient(
+                  to bottom,
+                  black,
+                  transparent 84%
+          );
+}
+
+.main-hero-ambient-one {
+  inset: auto auto -18% -10%;
+
+  width: 42vw;
+  height: 42vw;
+
+  border-radius: 50%;
+
+  background:
+          radial-gradient(
+                  circle,
+                  rgba(242, 107, 66, 0.06),
+                  transparent 70%
+          );
+
+  filter: blur(40px);
+}
+
+.main-hero-ambient-two {
+  inset: 4% -12% auto auto;
+
+  width: 36vw;
+  height: 36vw;
+
+  border-radius: 50%;
+
+  background:
+          radial-gradient(
+                  circle,
+                  rgba(255, 255, 255, 0.035),
+                  transparent 70%
+          );
+
+  filter: blur(44px);
+}
+
+.main-hero-shell {
+  position: relative;
+  z-index: 2;
+
+  width:
+          min(
+                  1480px,
+                  calc(100% - 48px)
+          );
+
+  min-height:
+          calc(100svh - 54px);
+
+  margin: 0 auto;
+
+  padding:
+          124px 0
+          86px;
+
+  display: grid;
+
+  grid-template-columns:
+        minmax(0, 1.02fr)
+        minmax(430px, 0.98fr);
+
+  align-items: center;
+
+  gap:
+          clamp(
+                  48px,
+                  6vw,
+                  108px
+          );
+}
+
+
+/* COPY */
+
+.main-hero-copy {
+  position: relative;
+  z-index: 3;
+}
+
+.main-hero-eyebrow {
+  margin-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.56rem;
+
+  letter-spacing: 0.14em;
+
+  color:
+          rgba(244, 240, 232, 0.42);
+}
+
+.main-hero-eyebrow i {
+  width: 20px;
+  height: 1px;
+
+  background: var(--signal);
+}
+
+.main-hero-title {
+  margin: 0;
+
+  max-width: 860px;
+
+  display: flex;
+  flex-direction: column;
+
+  font-family:
+          var(--font-display),
+          sans-serif;
+
+  font-size:
+          clamp(
+                  3.6rem,
+                  7.25vw,
+                  8rem
+          );
+
+  line-height: 0.805;
+
+  letter-spacing: -0.078em;
+
+  font-weight: 700;
+}
+
+.main-hero-title > span {
+  display: block;
+
+  animation:
+          mainHeroReveal
+          880ms
+          cubic-bezier(
+                  0.16,
+                  1,
+                  0.3,
+                  1
+          )
+          both;
+}
+
+.main-hero-title > span:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.main-hero-title > span:nth-child(3) {
+  animation-delay: 140ms;
+}
+
+.main-hero-title-accent {
+  position: relative;
+  width: fit-content;
+
+  color: var(--signal);
+}
+
+.main-hero-title-accent::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: -7px;
+
+  height: 1px;
+
+  transform-origin: left;
+
+  background:
+          linear-gradient(
+                  90deg,
+                  var(--signal),
+                  transparent
+          );
+
+  animation:
+          mainHeroUnderline
+          1.2s
+          420ms
+          cubic-bezier(
+                  0.16,
+                  1,
+                  0.3,
+                  1
+          )
+          both;
+}
+
+.main-hero-description {
+  max-width: 425px;
+
+  margin:
+          24px 0
+          0;
+
+  font-family:
+          var(--font-sans),
+          sans-serif;
+
+  font-size:
+          clamp(
+                  0.82rem,
+                  0.9vw,
+                  0.95rem
+          );
+
+  line-height: 1.58;
+
+  color:
+          rgba(244, 240, 232, 0.44);
+}
+
+
+/* ACTION LINE */
+
+.main-hero-primary-line {
+  margin-top: 28px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: 18px;
+}
+
+.main-hero-walk {
+  min-height: 52px;
+
+  padding:
+          0 16px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 28px;
+
+  border:
+          1px solid
+          var(--signal);
+
+  background:
+          var(--signal);
+
+  color: #08090a;
+
+  text-decoration: none;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 0.09em;
+
+  box-shadow:
+          0 14px 40px
+          rgba(242, 107, 66, 0.1);
+
+  transition:
+          transform 300ms
+          cubic-bezier(
+                  0.16,
+                  1,
+                  0.3,
+                  1
+          ),
+          background 250ms ease,
+          border-color 250ms ease;
+}
+
+.main-hero-walk:hover {
+  transform: translateY(-3px);
+
+  background: var(--paper);
+
+  border-color: var(--paper);
+}
+
+.main-hero-walk strong {
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.main-hero-book {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color:
+          rgba(244, 240, 232, 0.56);
+
+  text-decoration: none;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.52rem;
+
+  letter-spacing: 0.08em;
+
+  transition:
+          color 250ms ease,
+          transform 250ms ease;
+}
+
+.main-hero-book:hover {
+  color: var(--signal);
+
+  transform: translateX(3px);
+}
+
+.main-hero-footnote {
+  margin-top: 34px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: 8px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.46rem;
+
+  letter-spacing: 0.11em;
+
+  color:
+          rgba(244, 240, 232, 0.22);
+}
+
+.main-hero-footnote i {
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background: var(--signal);
+}
+
+
+/* VISUAL */
+
+.main-hero-visual {
+  --hero-x: 50%;
+  --hero-y: 50%;
+  --hero-rotate-x: 0deg;
+  --hero-rotate-y: 0deg;
+
+  position: relative;
+  width: 100%;
+
+  perspective: 1300px;
+}
+
+.main-hero-visual-glow {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 72%;
+
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  transform:
+          translate(-50%, -50%);
+
+  background:
+          radial-gradient(
+                  circle,
+                  rgba(242, 107, 66, 0.15),
+                  rgba(242, 107, 66, 0.018)
+                  48%,
+                  transparent 72%
+          );
+
+  filter: blur(24px);
+
+  pointer-events: none;
+
+  animation:
+          mainHeroGlow
+          6s
+          ease-in-out
+          infinite;
+}
+
+.main-hero-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 0.98;
+
+  overflow: hidden;
+
+  border:
+          1px solid
+          rgba(244, 240, 232, 0.1);
+
+  background:
+          linear-gradient(
+                  150deg,
+                  rgba(18, 19, 20, 0.94),
+                  rgba(7, 8, 9, 0.99)
+          );
+
+  box-shadow:
+          0 40px 110px
+          rgba(0, 0, 0, 0.34),
+          inset 0 0 0 1px
+          rgba(255, 255, 255, 0.012);
+
+  transform:
+          rotateX(
+                  var(--hero-rotate-x)
+          )
+          rotateY(
+                  var(--hero-rotate-y)
+          );
+
+  transform-style: preserve-3d;
+
+  transition:
+          transform
+          550ms
+          cubic-bezier(
+                  0.16,
+                  1,
+                  0.3,
+                  1
+          );
+}
+
+.main-hero-frame::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+          radial-gradient(
+                  circle at
+                  var(--hero-x)
+                  var(--hero-y),
+                  rgba(255, 255, 255, 0.055),
+                  transparent 23%
+          );
+}
+
+.main-hero-frame-top {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 10;
+
+  min-height: 42px;
+
+  padding: 0 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom:
+          1px solid
+          rgba(244, 240, 232, 0.06);
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.43rem;
+
+  letter-spacing: 0.11em;
+
+  color:
+          rgba(244, 240, 232, 0.3);
+}
+
+.main-hero-frame-top div {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: var(--signal);
+}
+
+.main-hero-frame-top i {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: var(--signal);
+
+  box-shadow:
+          0 0 12px
+          rgba(242, 107, 66, 0.65);
+
+  animation:
+          mainHeroLive
+          1.8s
+          ease-in-out
+          infinite;
+}
+
+.main-hero-side-index {
+  position: absolute;
+
+  left: 12px;
+  top: 78px;
+  bottom: 68px;
+
+  z-index: 5;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.27rem;
+
+  color:
+          rgba(244, 240, 232, 0.16);
+}
+
+.main-hero-world {
+  position: absolute;
+  overflow: hidden;
+
+  border:
+          1px solid
+          rgba(244, 240, 232, 0.065);
+
+  background:
+          linear-gradient(
+                  145deg,
+                  rgba(244, 240, 232, 0.02),
+                  rgba(244, 240, 232, 0.006)
+          );
+
+  backdrop-filter: blur(8px);
+
+  transition:
+          border-color 250ms ease,
+          background 250ms ease,
+          transform 250ms ease;
+}
+
+.main-hero-world:hover {
+  border-color:
+          rgba(242, 107, 66, 0.26);
+
+  background:
+          rgba(242, 107, 66, 0.02);
+
+  transform: translateY(-2px);
+}
+
+.main-hero-world-label {
+  position: absolute;
+
+  top: 11px;
+  left: 12px;
+  right: 12px;
+
+  z-index: 3;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.35rem;
+
+  letter-spacing: 0.08em;
+}
+
+.main-hero-world-label span {
+  color:
+          rgba(244, 240, 232, 0.28);
+}
+
+.main-hero-world-label strong {
+  color: var(--signal);
+  font-weight: 500;
+}
+
+.main-hero-world-media {
+  left: 6%;
+  top: 14%;
+
+  width: 47%;
+  height: 38%;
+}
+
+.main-hero-world-tech {
+  right: 5%;
+  top: 25%;
+
+  width: 39%;
+  height: 44%;
+}
+
+.main-hero-world-talk {
+  left: 13%;
+  bottom: 8%;
+
+  width: 54%;
+  height: 30%;
+}
+
+.main-hero-focus {
+  position: absolute;
+
+  left: 50%;
+  top: 54%;
+
+  width: 68px;
+  height: 68px;
+
+  transform:
+          translate(-50%, -50%);
+
+  animation:
+          mainHeroFocusFloat
+          4.5s
+          ease-in-out
+          infinite;
+}
+
+.main-hero-focus span {
+  position: absolute;
+
+  width: 19px;
+  height: 19px;
+
+  border-color:
+          rgba(244, 240, 232, 0.7);
+
+  border-style: solid;
+}
+
+.main-hero-focus span:nth-child(1) {
+  left: 0;
+  top: 0;
+
+  border-width:
+          1px 0 0 1px;
+}
+
+.main-hero-focus span:nth-child(2) {
+  right: 0;
+  top: 0;
+
+  border-width:
+          1px 1px 0 0;
+}
+
+.main-hero-focus span:nth-child(3) {
+  left: 0;
+  bottom: 0;
+
+  border-width:
+          0 0 1px 1px;
+}
+
+.main-hero-focus span:nth-child(4) {
+  right: 0;
+  bottom: 0;
+
+  border-width:
+          0 1px 1px 0;
+}
+
+.main-hero-focus-dot {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 6px;
+  height: 6px;
+
+  transform:
+          translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: var(--signal);
+
+  box-shadow:
+          0 0 16px
+          rgba(242, 107, 66, 0.8);
+}
+
+.main-hero-media-data {
+  position: absolute;
+
+  left: 12px;
+  right: 12px;
+  bottom: 10px;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.31rem;
+
+  color:
+          rgba(244, 240, 232, 0.26);
+}
+
+.main-hero-code {
+  position: absolute;
+
+  left: 15px;
+  right: 15px;
+  top: 37%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size:
+          clamp(
+                  0.4rem,
+                  0.66vw,
+                  0.56rem
+          );
+
+  color:
+          rgba(244, 240, 232, 0.54);
+}
+
+.main-hero-code span {
+  animation:
+          mainHeroCode
+          5s
+          ease-in-out
+          infinite;
+}
+
+.main-hero-code span:nth-child(2) {
+  animation-delay: 350ms;
+}
+
+.main-hero-code span:nth-child(3) {
+  animation-delay: 700ms;
+}
+
+.main-hero-code em {
+  color: var(--signal);
+  font-style: normal;
+}
+
+.main-hero-code-cursor {
+  color: var(--signal);
+
+  animation:
+          mainHeroCursor
+          800ms
+          steps(1)
+          infinite !important;
+}
+
+.main-hero-nodes i {
+  position: absolute;
+
+  width: 5px;
+  height: 5px;
+
+  border:
+          1px solid
+          rgba(242, 107, 66, 0.6);
+
+  border-radius: 50%;
+
+  box-shadow:
+          0 0 11px
+          rgba(242, 107, 66, 0.2);
+}
+
+.main-hero-nodes i:nth-child(1) {
+  left: 14%;
+  bottom: 15%;
+}
+
+.main-hero-nodes i:nth-child(2) {
+  left: 39%;
+  bottom: 9%;
+}
+
+.main-hero-nodes i:nth-child(3) {
+  right: 14%;
+  bottom: 20%;
+}
+
+.main-hero-nodes i:nth-child(4) {
+  right: 25%;
+  top: 20%;
+}
+
+.main-hero-nodes i:nth-child(5) {
+  left: 20%;
+  top: 24%;
+}
+
+.main-hero-wave {
+  position: absolute;
+
+  left: 14px;
+  right: 14px;
+  top: 50%;
+
+  height: 44px;
+
+  transform:
+          translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 3px;
+}
+
+.main-hero-wave i {
+  width: 2px;
+  height: 12px;
+
+  background: var(--signal);
+
+  opacity: 0.5;
+
+  animation:
+          mainHeroWave
+          1.15s
+          ease-in-out
+          infinite alternate;
+}
+
+.main-hero-onair {
+  position: absolute;
+
+  right: 12px;
+  bottom: 10px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.32rem;
+
+  letter-spacing: 0.09em;
+
+  color:
+          rgba(244, 240, 232, 0.3);
+}
+
+.main-hero-onair i {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: var(--signal);
+
+  animation:
+          mainHeroLive
+          1.6s
+          ease-in-out
+          infinite;
+}
+
+.main-hero-core {
+  position: absolute;
+
+  right: 23%;
+  bottom: 25%;
+
+  z-index: 6;
+
+  width: 100px;
+  height: 100px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background:
+          rgba(8, 9, 10, 0.9);
+
+  border:
+          1px solid
+          rgba(242, 107, 66, 0.36);
+
+  box-shadow:
+          0 0 42px
+          rgba(242, 107, 66, 0.1);
+}
+
+.main-hero-core strong {
+  position: relative;
+  z-index: 3;
+
+  font-family:
+          var(--font-display),
+          sans-serif;
+
+  font-size: 1.05rem;
+
+  letter-spacing: -0.06em;
+}
+
+.main-hero-core > span {
+  position: absolute;
+
+  bottom: 21px;
+
+  z-index: 3;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.2rem;
+
+  letter-spacing: 0.1em;
+
+  color:
+          rgba(244, 240, 232, 0.27);
+}
+
+.main-hero-core-ring {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  border-radius: 50%;
+
+  border:
+          1px solid
+          rgba(242, 107, 66, 0.17);
+
+  transform:
+          translate(-50%, -50%);
+}
+
+.main-hero-core-ring-one {
+  width: 126%;
+  height: 126%;
+
+  animation:
+          mainHeroOrbit
+          10s
+          linear
+          infinite;
+}
+
+.main-hero-core-ring-two {
+  width: 152%;
+  height: 152%;
+
+  border-style: dashed;
+
+  animation:
+          mainHeroOrbitReverse
+          15s
+          linear
+          infinite;
+}
+
+.main-hero-core-ring-three {
+  width: 180%;
+  height: 180%;
+
+  opacity: 0.34;
+}
+
+.main-hero-corner {
+  position: absolute;
+
+  width: 22px;
+  height: 22px;
+
+  opacity: 0.38;
+}
+
+.main-hero-corner-tl {
+  left: 11px;
+  top: 55px;
+
+  border-left:
+          1px solid var(--signal);
+
+  border-top:
+          1px solid var(--signal);
+}
+
+.main-hero-corner-tr {
+  right: 11px;
+  top: 55px;
+
+  border-right:
+          1px solid var(--signal);
+
+  border-top:
+          1px solid var(--signal);
+}
+
+.main-hero-corner-bl {
+  left: 11px;
+  bottom: 11px;
+
+  border-left:
+          1px solid var(--signal);
+
+  border-bottom:
+          1px solid var(--signal);
+}
+
+.main-hero-corner-br {
+  right: 11px;
+  bottom: 11px;
+
+  border-right:
+          1px solid var(--signal);
+
+  border-bottom:
+          1px solid var(--signal);
+}
+
+.main-hero-scan {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  z-index: 20;
+
+  height: 1px;
+
+  background:
+          linear-gradient(
+                  90deg,
+                  transparent,
+                  rgba(242, 107, 66, 0.7),
+                  transparent
+          );
+
+  box-shadow:
+          0 0 14px
+          rgba(242, 107, 66, 0.25);
+
+  animation:
+          mainHeroScan
+          5.5s
+          ease-in-out
+          infinite;
+
+  pointer-events: none;
+}
+
+.main-hero-visual-caption {
+  margin-top: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.42rem;
+
+  letter-spacing: 0.12em;
+
+  color:
+          rgba(244, 240, 232, 0.26);
+}
+
+.main-hero-visual-caption i {
+  width: 22px;
+  height: 1px;
+
+  background: var(--signal);
+}
+
+
+/* MARQUEE */
+
+.main-hero-marquee {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 5;
+
+  height: 50px;
+
+  overflow: hidden;
+
+  border-top:
+          1px solid
+          rgba(244, 240, 232, 0.07);
+
+  background: var(--signal);
+
+  color: #08090a;
+}
+
+.main-hero-marquee > div {
+  width: max-content;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 22px;
+
+  padding-left: 22px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.54rem;
+
+  letter-spacing: 0.08em;
+
+  animation:
+          mainHeroMarquee
+          27s
+          linear
+          infinite;
+}
+
+
+/* ANIMATION */
+
+@keyframes mainHeroReveal {
+  from {
+    opacity: 0;
+
+    transform:
+            translateY(34px);
+
+    filter: blur(7px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+            translateY(0);
+
+    filter: blur(0);
+  }
+}
+
+@keyframes mainHeroUnderline {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes mainHeroGlow {
+  0%,
+  100% {
+    opacity: 0.5;
+
+    transform:
+            translate(-50%, -50%)
+            scale(0.95);
+  }
+
+  50% {
+    opacity: 0.9;
+
+    transform:
+            translate(-50%, -50%)
+            scale(1.04);
+  }
+}
+
+@keyframes mainHeroLive {
+  0%,
+  100% {
+    opacity: 0.35;
+
+    transform:
+            scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform:
+            scale(1.18);
+  }
+}
+
+@keyframes mainHeroFocusFloat {
+  0%,
+  100% {
+    transform:
+            translate(-50%, -50%);
+  }
+
+  50% {
+    transform:
+            translate(-45%, -54%);
+  }
+}
+
+@keyframes mainHeroCode {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: translateX(0);
+  }
+
+  50% {
+    opacity: 0.95;
+    transform: translateX(4px);
+  }
+}
+
+@keyframes mainHeroCursor {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes mainHeroWave {
+  from {
+    height: 8px;
+    opacity: 0.32;
+  }
+
+  to {
+    height: 34px;
+    opacity: 0.85;
+  }
+}
+
+@keyframes mainHeroOrbit {
+  to {
+    transform:
+            translate(-50%, -50%)
+            rotate(360deg);
+  }
+}
+
+@keyframes mainHeroOrbitReverse {
+  to {
+    transform:
+            translate(-50%, -50%)
+            rotate(-360deg);
+  }
+}
+
+@keyframes mainHeroScan {
+  0% {
+    top: 9%;
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  92% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 94%;
+    opacity: 0;
+  }
+}
+
+@keyframes mainHeroMarquee {
+  to {
+    transform:
+            translateX(-50%);
+  }
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+  .main-hero-shell {
+    grid-template-columns:
+            1fr
+            minmax(
+                370px,
+                0.9fr
+            );
+
+    gap: 36px;
+  }
+
+  .main-hero-title {
+    font-size:
+            clamp(
+                    3.4rem,
+                    7vw,
+                    6.2rem
+            );
+  }
+}
+
+@media (max-width: 860px) {
+  .main-hero {
+    min-height: auto;
+  }
+
+  .main-hero-shell {
+    width:
+            min(
+                    calc(100% - 28px),
+                    760px
+            );
+
+    min-height: auto;
+
+    padding:
+            112px 0
+            94px;
+
+    grid-template-columns:
+            1fr;
+
+    gap: 48px;
+  }
+
+  .main-hero-copy {
+    max-width: 700px;
+  }
+
+  .main-hero-title {
+    font-size:
+            clamp(
+                    3.5rem,
+                    12vw,
+                    6.2rem
+            );
+  }
+
+  .main-hero-description {
+    max-width: 390px;
+  }
+
+  .main-hero-visual {
+    max-width: 640px;
+
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .main-hero-shell {
+    width:
+            calc(100% - 24px);
+
+    padding:
+            98px 0
+            82px;
+  }
+
+  .main-hero-eyebrow {
+    font-size: 0.44rem;
+
+    margin-bottom: 17px;
+  }
+
+  .main-hero-title {
+    font-size:
+            clamp(
+                    3rem,
+                    15vw,
+                    4.8rem
+            );
+
+    line-height: 0.84;
+  }
+
+  .main-hero-description {
+    margin-top: 21px;
+
+    max-width: 340px;
+
+    font-size: 0.82rem;
+  }
+
+  .main-hero-primary-line {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 13px;
+  }
+
+  .main-hero-walk {
+    width: 100%;
+
+    justify-content:
+            space-between;
+  }
+
+  .main-hero-footnote {
+    margin-top: 28px;
+  }
+
+  .main-hero-frame {
+    aspect-ratio: 0.84;
+  }
+
+  .main-hero-world-media {
+    left: 5%;
+    top: 13%;
+
+    width: 58%;
+    height: 34%;
+  }
+
+  .main-hero-world-tech {
+    right: 4%;
+    top: 29%;
+
+    width: 48%;
+    height: 40%;
+  }
+
+  .main-hero-world-talk {
+    left: 7%;
+    bottom: 7%;
+
+    width: 61%;
+    height: 27%;
+  }
+
+  .main-hero-core {
+    right: 19%;
+    bottom: 23%;
+
+    width: 80px;
+    height: 80px;
+  }
+
+  .main-hero-core > span {
+    bottom: 15px;
+
+    font-size: 0.17rem;
+  }
+
+  .main-hero-marquee {
+    height: 44px;
+  }
+
+  .main-hero-marquee > div {
+    font-size: 0.47rem;
+  }
+}
+
+@media (
+prefers-reduced-motion:
+        reduce
+) {
+  .main-hero *,
+  .main-hero *::before,
+  .main-hero *::after {
+    animation-duration:
+            0.01ms !important;
+
+    animation-iteration-count:
+            1 !important;
+  }
+
+  .main-hero-frame {
+    transform:
+            none !important;
+  }
+}
+
+
+/* =========================================================
+   MD SURVEILLANCE SPOTLIGHT
+========================================================= */
+
+.main-hero-frame {
+  isolation: isolate;
+}
+
+.main-hero-world {
+  z-index: 3;
+}
+
+.main-hero-core {
+  overflow: visible;
+}
+
+.main-hero-surveillance {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 0;
+  height: 0;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  animation:
+          mainHeroSurveillanceSweep
+          10.5s
+          linear
+          infinite;
+}
+
+.main-hero-surveillance-beam {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 420px;
+  height: 170px;
+
+  transform:
+          translateY(-50%);
+
+  transform-origin:
+          0 50%;
+
+  clip-path:
+          polygon(
+                  0 46%,
+                  100% 0,
+                  100% 100%,
+                  0 54%
+          );
+
+  background:
+          linear-gradient(
+                  90deg,
+                  rgba(242, 107, 66, 0.18) 0%,
+                  rgba(242, 107, 66, 0.075) 38%,
+                  rgba(242, 107, 66, 0.018) 72%,
+                  transparent 100%
+          );
+
+  filter:
+          blur(1px);
+
+  mix-blend-mode:
+          screen;
+
+  opacity: 0.9;
+}
+
+.main-hero-surveillance-beam::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 14% 0;
+
+  background:
+          linear-gradient(
+                  90deg,
+                  rgba(255, 226, 198, 0.32),
+                  rgba(242, 107, 66, 0.08) 42%,
+                  transparent 82%
+          );
+
+  filter:
+          blur(10px);
+}
+
+.main-hero-surveillance-edge {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 390px;
+  height: 1px;
+
+  transform-origin:
+          0 50%;
+
+  background:
+          linear-gradient(
+                  90deg,
+                  rgba(255, 235, 215, 0.72),
+                  rgba(242, 107, 66, 0.3) 38%,
+                  transparent 100%
+          );
+
+  box-shadow:
+          0 0 11px
+          rgba(242, 107, 66, 0.3);
+}
+
+.main-hero-core::before {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 8px;
+  height: 8px;
+
+  z-index: 8;
+
+  transform:
+          translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+          #fff3e8;
+
+  box-shadow:
+          0 0 8px
+          rgba(255, 243, 232, 0.95),
+          0 0 22px
+          rgba(242, 107, 66, 0.75),
+          0 0 44px
+          rgba(242, 107, 66, 0.32);
+
+  animation:
+          mainHeroLensPulse
+          2.2s
+          ease-in-out
+          infinite;
+}
+
+.main-hero-core::after {
+  content: "SURVEILLANCE";
+
+  position: absolute;
+
+  top: -26px;
+  left: 50%;
+
+  transform:
+          translateX(-50%);
+
+  white-space: nowrap;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.18rem;
+
+  letter-spacing: 0.18em;
+
+  color:
+          rgba(242, 107, 66, 0.48);
+}
+
+.main-hero-radar-ring {
+  position: absolute;
+
+  right: 23%;
+  bottom: 25%;
+
+  z-index: 1;
+
+  width: 100px;
+  height: 100px;
+
+  border:
+          1px solid
+          rgba(242, 107, 66, 0.06);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  transform:
+          translate(0, 0)
+          scale(1);
+}
+
+.main-hero-radar-ring-one {
+  animation:
+          mainHeroRadarPulse
+          3.8s
+          ease-out
+          infinite;
+}
+
+.main-hero-radar-ring-two {
+  animation:
+          mainHeroRadarPulse
+          3.8s
+          1.9s
+          ease-out
+          infinite;
+}
+
+/* Cards subtly react as the surveillance system sweeps */
+.main-hero-world-media {
+  animation:
+          mainHeroCardPingMedia
+          10.5s
+          linear
+          infinite;
+}
+
+.main-hero-world-tech {
+  animation:
+          mainHeroCardPingTech
+          10.5s
+          linear
+          infinite;
+}
+
+.main-hero-world-talk {
+  animation:
+          mainHeroCardPingTalk
+          10.5s
+          linear
+          infinite;
+}
+
+@keyframes mainHeroSurveillanceSweep {
+  from {
+    transform:
+            rotate(-150deg);
+  }
+
+  to {
+    transform:
+            rotate(210deg);
+  }
+}
+
+@keyframes mainHeroLensPulse {
+  0%,
+  100% {
+    opacity: 0.72;
+
+    transform:
+            translate(-50%, -50%)
+            scale(0.82);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform:
+            translate(-50%, -50%)
+            scale(1.28);
+  }
+}
+
+@keyframes mainHeroRadarPulse {
+  0% {
+    opacity: 0.22;
+
+    transform:
+            scale(1);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+            scale(3.6);
+  }
+}
+
+/*
+   Approximate card ping windows synchronized to the
+   rotating surveillance beam.
+*/
+@keyframes mainHeroCardPingMedia {
+  0%,
+  7%,
+  23%,
+  100% {
+    border-color:
+            rgba(244, 240, 232, 0.065);
+
+    box-shadow: none;
+  }
+
+  12%,
+  17% {
+    border-color:
+            rgba(242, 107, 66, 0.52);
+
+    box-shadow:
+            inset 0 0 34px
+            rgba(242, 107, 66, 0.045),
+            0 0 26px
+            rgba(242, 107, 66, 0.08);
+  }
+}
+
+@keyframes mainHeroCardPingTech {
+  0%,
+  35%,
+  53%,
+  100% {
+    border-color:
+            rgba(244, 240, 232, 0.065);
+
+    box-shadow: none;
+  }
+
+  40%,
+  47% {
+    border-color:
+            rgba(242, 107, 66, 0.52);
+
+    box-shadow:
+            inset 0 0 34px
+            rgba(242, 107, 66, 0.045),
+            0 0 26px
+            rgba(242, 107, 66, 0.08);
+  }
+}
+
+@keyframes mainHeroCardPingTalk {
+  0%,
+  65%,
+  84%,
+  100% {
+    border-color:
+            rgba(244, 240, 232, 0.065);
+
+    box-shadow: none;
+  }
+
+  70%,
+  78% {
+    border-color:
+            rgba(242, 107, 66, 0.52);
+
+    box-shadow:
+            inset 0 0 34px
+            rgba(242, 107, 66, 0.045),
+            0 0 26px
+            rgba(242, 107, 66, 0.08);
+  }
+}
+
+@media (max-width: 560px) {
+  .main-hero-surveillance-beam {
+    width: 280px;
+    height: 130px;
+  }
+
+  .main-hero-surveillance-edge {
+    width: 260px;
+  }
+
+  .main-hero-radar-ring {
+    right: 19%;
+    bottom: 23%;
+
+    width: 80px;
+    height: 80px;
+  }
+
+  .main-hero-core::after {
+    top: -22px;
+
+    font-size: 0.15rem;
+  }
+}
+
+@media (
+prefers-reduced-motion:
+        reduce
+) {
+  .main-hero-surveillance,
+  .main-hero-radar-ring,
+  .main-hero-world-media,
+  .main-hero-world-tech,
+  .main-hero-world-talk,
+  .main-hero-core::before {
+    animation:
+            none !important;
+  }
+
+  .main-hero-surveillance {
+    transform:
+            rotate(-18deg);
+  }
+
+  .main-hero-surveillance-beam {
+    opacity: 0.34;
+  }
+}
+
+/* =========================================================
+   LORD'S NTA10MENT — CINEMATIC FILM SYSTEM
+========================================================= */
+
+.lords-cinema {
+  position: relative;
+
+  min-height: auto;
+
+  padding: clamp(54px, 6vw, 86px) 0;
+
+  overflow: hidden;
+
+  background: #070809;
+
+  color: var(--paper);
+}
+
+.lords-cinema-noise {
+  position: absolute;
+  inset: 0;
+
+  z-index: 8;
+
+  pointer-events: none;
+
+  opacity: 0.045;
+
+  mix-blend-mode: screen;
+
+  background-image:
+          url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.62'/%3E%3C/svg%3E");
+}
+
+.lords-cinema-frame {
+  position: relative;
+
+  width: min(1420px, calc(100% - 48px));
+
+  min-height: auto;
+
+  margin: 0 auto;
+
+  padding: 0;
+}
+
+.lords-cinema-stage {
+  position: relative;
+
+  min-height: 620px;
+
+  height: clamp(620px, 68vw, 760px);
+
+  max-height: 760px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(244, 240, 232, 0.1);
+
+  border-radius: 2px;
+
+  background: #0b0c0d;
+
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.32);
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   IMAGES
+========================================================= */
+
+.lords-cinema-image,
+.lords-cinema-slice {
+  position: absolute;
+  inset: 0;
+}
+
+.lords-cinema-image {
+  z-index: 0;
+}
+
+.lords-cinema-photo {
+  object-fit: cover;
+
+  object-position:
+          center center;
+}
+
+.lords-cinema-image-current {
+  z-index: 2;
+
+  animation:
+          lordsCinemaDrift
+          9s
+          ease-in-out
+          infinite alternate;
+}
+
+.lords-cinema-image-previous {
+  z-index: 1;
+
+  opacity: 0;
+}
+
+.lords-cinema-transitioning
+.lords-cinema-image-previous {
+  opacity: 1;
+}
+
+.lords-cinema-transitioning
+.lords-cinema-image-current {
+  animation:
+          lordsCinemaExit
+          900ms
+          cubic-bezier(
+                  0.16,
+                  1,
+                  0.3,
+                  1
+          )
+          both;
+}
+
+
+/* =========================================================
+   SPLIT FILM REVEAL
+========================================================= */
+
+.lords-cinema-slice {
+  z-index: 4;
+
+  opacity: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+.lords-cinema-slice-left {
+  right: 50%;
+}
+
+.lords-cinema-slice-right {
+  left: 50%;
+}
+
+.lords-cinema-slice-left
+.lords-cinema-photo {
+  width: 200% !important;
+
+  max-width: none !important;
+}
+
+.lords-cinema-slice-right
+.lords-cinema-photo {
+  width: 200% !important;
+
+  max-width: none !important;
+
+  left: -100% !important;
+}
+
+.lords-cinema-transitioning
+.lords-cinema-slice {
+  opacity: 1;
+}
+
+.lords-cinema-transitioning
+.lords-cinema-slice-left {
+  animation:
+          lordsCinemaSliceLeft
+          900ms
+          cubic-bezier(
+                  0.16,
+                  1,
+                  0.3,
+                  1
+          )
+          both;
+}
+
+.lords-cinema-transitioning
+.lords-cinema-slice-right {
+  animation:
+          lordsCinemaSliceRight
+          900ms
+          75ms
+          cubic-bezier(
+                  0.16,
+                  1,
+                  0.3,
+                  1
+          )
+          both;
+}
+
+
+/* =========================================================
+   CINEMA OVERLAYS
+========================================================= */
+
+.lords-cinema-vignette {
+  position: absolute;
+  inset: 0;
+
+  z-index: 5;
+
+  pointer-events: none;
+
+  background:
+          linear-gradient(
+                  90deg,
+                  rgba(
+                          5,
+                          6,
+                          7,
+                          0.82
+                  )
+                  0%,
+                  rgba(
+                          5,
+                          6,
+                          7,
+                          0.54
+                  )
+                  30%,
+                  rgba(
+                          5,
+                          6,
+                          7,
+                          0.08
+                  )
+                  62%,
+                  rgba(
+                          5,
+                          6,
+                          7,
+                          0.2
+                  )
+                  100%
+          ),
+          linear-gradient(
+                  to top,
+                  rgba(
+                          5,
+                          6,
+                          7,
+                          0.54
+                  ),
+                  transparent
+                  48%
+          );
+}
+
+.lords-cinema-exposure {
+  position: absolute;
+  inset: 0;
+
+  z-index: 11;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  background:
+          rgba(
+                  255,
+                  245,
+                  232,
+                  0.86
+          );
+}
+
+.lords-cinema-transitioning
+.lords-cinema-exposure {
+  animation:
+          lordsCinemaExposure
+          780ms
+          ease-out
+          both;
+}
+
+.lords-cinema-scan {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  left: -20%;
+
+  z-index: 10;
+
+  width: 18%;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  background:
+          linear-gradient(
+                  90deg,
+                  transparent,
+                  rgba(
+                          255,
+                          241,
+                          224,
+                          0.18
+                  ),
+                  rgba(
+                          242,
+                          107,
+                          66,
+                          0.34
+                  ),
+                  transparent
+          );
+
+  filter: blur(8px);
+}
+
+.lords-cinema-transitioning
+.lords-cinema-scan {
+  animation:
+          lordsCinemaScan
+          900ms
+          ease-in-out
+          both;
+}
+
+
+/* =========================================================
+   TARGET / CAMERA UI
+========================================================= */
+
+.lords-cinema-crosshair {
+  position: absolute;
+
+  right: 11%;
+  top: 45%;
+
+  z-index: 7;
+
+  width: 104px;
+  height: 104px;
+
+  transform:
+          translateY(-50%);
+
+  opacity: 0.66;
+
+  animation:
+          lordsCinemaTarget
+          5.5s
+          ease-in-out
+          infinite;
+}
+
+.lords-cinema-crosshair
+span {
+  position: absolute;
+
+  width: 28px;
+  height: 28px;
+
+  border-style:
+          solid;
+
+  border-color:
+          rgba(
+                  244,
+                  240,
+                  232,
+                  0.8
+          );
+}
+
+.lords-cinema-crosshair
+span:nth-child(1) {
+  left: 0;
+  top: 0;
+
+  border-width:
+          1px 0 0 1px;
+}
+
+.lords-cinema-crosshair
+span:nth-child(2) {
+  right: 0;
+  top: 0;
+
+  border-width:
+          1px 1px 0 0;
+}
+
+.lords-cinema-crosshair
+span:nth-child(3) {
+  left: 0;
+  bottom: 0;
+
+  border-width:
+          0 0 1px 1px;
+}
+
+.lords-cinema-crosshair
+span:nth-child(4) {
+  right: 0;
+  bottom: 0;
+
+  border-width:
+          0 1px 1px 0;
+}
+
+.lords-cinema-crosshair
+i {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 7px;
+  height: 7px;
+
+  transform:
+          translate(
+                  -50%,
+                  -50%
+          );
+
+  border-radius: 50%;
+
+  background:
+          var(--signal);
+
+  box-shadow:
+          0 0 18px
+          rgba(
+                  242,
+                  107,
+                  66,
+                  0.75
+          );
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.lords-cinema-topbar {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 12;
+
+  min-height: 64px;
+
+  padding:
+          0 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content:
+          space-between;
+
+  border-bottom:
+          1px solid
+          rgba(
+                  244,
+                  240,
+                  232,
+                  0.08
+          );
+
+  background:
+          linear-gradient(
+                  to bottom,
+                  rgba(
+                          5,
+                          6,
+                          7,
+                          0.5
+                  ),
+                  transparent
+          );
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.52rem;
+
+  letter-spacing:
+          0.11em;
+
+  color:
+          rgba(
+                  244,
+                  240,
+                  232,
+                  0.48
+          );
+}
+
+.lords-cinema-topbar
+> div:first-child {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.lords-cinema-topbar
+> div:first-child
+i {
+  width: 22px;
+  height: 1px;
+
+  background:
+          var(--signal);
+}
+
+.lords-cinema-rec {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color:
+          var(--signal);
+}
+
+.lords-cinema-rec i {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background:
+          var(--signal);
+
+  box-shadow:
+          0 0 15px
+          rgba(
+                  242,
+                  107,
+                  66,
+                  0.7
+          );
+
+  animation:
+          lordsCinemaRec
+          1.5s
+          ease-in-out
+          infinite;
+}
+
+
+/* =========================================================
+   COPY
+========================================================= */
+
+.lords-cinema-copy {
+  position: absolute;
+
+  left:
+          clamp(
+                  36px,
+                  5vw,
+                  78px
+          );
+
+  top: 50%;
+
+  z-index: 12;
+
+  width:
+          min(
+                  500px,
+                  43vw
+          );
+
+  transform:
+          translateY(-50%);
+}
+
+.lords-cinema-kicker {
+  margin-bottom: 14px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.52rem;
+
+  letter-spacing:
+          0.14em;
+
+  color:
+          var(--signal);
+}
+
+.lords-cinema-copy h2 {
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  font-family:
+          var(--font-display),
+          sans-serif;
+
+  font-size:
+          clamp(
+                  3.6rem,
+                  6vw,
+                  6.7rem
+          );
+
+  font-weight: 700;
+
+  line-height: 0.82;
+
+  letter-spacing:
+          -0.075em;
+
+  text-shadow:
+          0 14px 50px
+          rgba(
+                  0,
+                  0,
+                  0,
+                  0.38
+          );
+}
+
+.lords-cinema-copy
+h2
+span:nth-child(2) {
+  color:
+          rgba(
+                  244,
+                  240,
+                  232,
+                  0.68
+          );
+}
+
+.lords-cinema-copy
+h2
+span:nth-child(3) {
+  color:
+          var(--signal);
+}
+
+.lords-cinema-transitioning
+.lords-cinema-copy
+h2
+span {
+  animation:
+          lordsCinemaTextNudge
+          780ms
+          cubic-bezier(
+                  0.16,
+                  1,
+                  0.3,
+                  1
+          )
+          both;
+}
+
+.lords-cinema-transitioning
+.lords-cinema-copy
+h2
+span:nth-child(2) {
+  animation-delay:
+          40ms;
+}
+
+.lords-cinema-transitioning
+.lords-cinema-copy
+h2
+span:nth-child(3) {
+  animation-delay:
+          80ms;
+}
+
+.lords-cinema-copy p {
+  max-width: 390px;
+
+  margin:
+          24px 0
+          0;
+
+  font-family:
+          var(--font-sans),
+          sans-serif;
+
+  font-size: 0.92rem;
+
+  line-height: 1.6;
+
+  color:
+          rgba(
+                  244,
+                  240,
+                  232,
+                  0.54
+          );
+}
+
+.lords-cinema-book {
+  margin-top: 25px;
+
+  min-height: 50px;
+
+  padding:
+          0 16px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 28px;
+
+  border:
+          1px solid
+          var(--signal);
+
+  background:
+          var(--signal);
+
+  color: #08090a;
+
+  text-decoration: none;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.55rem;
+
+  letter-spacing:
+          0.09em;
+
+  transition:
+          transform
+          280ms
+          cubic-bezier(
+                  0.16,
+                  1,
+                  0.3,
+                  1
+          ),
+          background
+          250ms ease;
+}
+
+.lords-cinema-book:hover {
+  transform:
+          translateY(-3px);
+
+  background:
+          var(--paper);
+}
+
+
+/* =========================================================
+   BOTTOM UI
+========================================================= */
+
+.lords-cinema-bottom {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 12;
+
+  min-height: 74px;
+
+  padding:
+          0 28px;
+
+  display: grid;
+
+  grid-template-columns:
+        auto
+        1fr
+        auto;
+
+  align-items: center;
+
+  gap: 24px;
+
+  border-top:
+          1px solid
+          rgba(
+                  244,
+                  240,
+                  232,
+                  0.08
+          );
+
+  background:
+          linear-gradient(
+                  to top,
+                  rgba(
+                          5,
+                          6,
+                          7,
+                          0.68
+                  ),
+                  transparent
+          );
+}
+
+.lords-cinema-counter {
+  display: flex;
+  align-items: baseline;
+
+  gap: 4px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+}
+
+.lords-cinema-counter
+strong {
+  font-size: 1.1rem;
+
+  color:
+          var(--paper);
+}
+
+.lords-cinema-counter
+span {
+  font-size: 0.48rem;
+
+  color:
+          rgba(
+                  244,
+                  240,
+                  232,
+                  0.32
+          );
+}
+
+.lords-cinema-meta {
+  display: flex;
+  align-items: center;
+  justify-content:
+          center;
+
+  gap: 8px;
+
+  font-family:
+          var(--font-mono),
+          monospace;
+
+  font-size: 0.43rem;
+
+  letter-spacing:
+          0.08em;
+
+  color:
+          rgba(
+                  244,
+                  240,
+                  232,
+                  0.35
+          );
+}
+
+.lords-cinema-meta i {
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background:
+          var(--signal);
+}
+
+.lords-cinema-dots {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+}
+
+.lords-cinema-dots
+button {
+  width: 17px;
+  height: 17px;
+
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+
+  border: 0;
+
+  background:
+          transparent;
+
+  cursor: pointer;
+}
+
+.lords-cinema-dots
+button
+span {
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background:
+          rgba(
+                  244,
+                  240,
+                  232,
+                  0.3
+          );
+
+  transition:
+          width 250ms ease,
+          border-radius
+          250ms ease,
+          background
+          250ms ease;
+}
+
+.lords-cinema-dots
+.lords-cinema-dot-active
+span {
+  width: 15px;
+
+  border-radius: 999px;
+
+  background:
+          var(--signal);
+}
+
+
+/* =========================================================
+   FILM PERFORATIONS
+========================================================= */
+
+.lords-cinema-film-edge {
+  position: absolute;
+
+  top: 82px;
+  bottom: 92px;
+
+  z-index: 13;
+
+  width: 11px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content:
+          space-between;
+
+  opacity: 0.32;
+
+  pointer-events: none;
+}
+
+.lords-cinema-film-edge-left {
+  left: 7px;
+}
+
+.lords-cinema-film-edge-right {
+  right: 7px;
+}
+
+.lords-cinema-film-edge i {
+  display: block;
+
+  width: 5px;
+  height: 12px;
+
+  border:
+          1px solid
+          rgba(
+                  244,
+                  240,
+                  232,
+                  0.48
+          );
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes lordsCinemaDrift {
+  from {
+    transform:
+            scale(1.025)
+            translate3d(
+                    -0.6%,
+                    0,
+                    0
+            );
+  }
+
+  to {
+    transform:
+            scale(1.065)
+            translate3d(
+                    0.8%,
+                    -0.6%,
+                    0
+            );
+  }
+}
+
+@keyframes lordsCinemaExit {
+  0% {
+    opacity: 1;
+
+    transform:
+            scale(1.04);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+            scale(1.09)
+            translateX(
+                    -1.2%
+            );
+
+    filter:
+            contrast(1.08)
+            brightness(0.72);
+  }
+}
+
+@keyframes lordsCinemaSliceLeft {
+  0% {
+    clip-path:
+            inset(
+                    0
+                    100%
+                    0
+                    0
+            );
+
+    transform:
+            translateX(
+                    -2%
+            );
+  }
+
+  100% {
+    clip-path:
+            inset(
+                    0
+                    0
+                    0
+                    0
+            );
+
+    transform:
+            translateX(0);
+  }
+}
+
+@keyframes lordsCinemaSliceRight {
+  0% {
+    clip-path:
+            inset(
+                    0
+                    0
+                    0
+                    100%
+            );
+
+    transform:
+            translateX(
+                    2%
+            );
+  }
+
+  100% {
+    clip-path:
+            inset(
+                    0
+                    0
+                    0
+                    0
+            );
+
+    transform:
+            translateX(0);
+  }
+}
+
+@keyframes lordsCinemaExposure {
+  0%,
+  23%,
+  100% {
+    opacity: 0;
+  }
+
+  27% {
+    opacity: 0.5;
+  }
+
+  34% {
+    opacity: 0.04;
+  }
+}
+
+@keyframes lordsCinemaScan {
+  0% {
+    left: -22%;
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 108%;
+    opacity: 0;
+  }
+}
+
+@keyframes lordsCinemaTarget {
+  0%,
+  100% {
+    transform:
+            translateY(-50%)
+            translate(
+                    0,
+                    0
+            );
+  }
+
+  50% {
+    transform:
+            translateY(-50%)
+            translate(
+                    -9px,
+                    6px
+            );
+  }
+}
+
+@keyframes lordsCinemaRec {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform:
+            scale(0.82);
+  }
+
+  50% {
+    opacity: 1;
+    transform:
+            scale(1.18);
+  }
+}
+
+@keyframes lordsCinemaTextNudge {
+  from {
+    opacity: 0.55;
+
+    transform:
+            translateX(
+                    -16px
+            );
+
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+            translateX(0);
+
+    filter: blur(0);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .lords-cinema {
+    padding: 44px 0;
+  }
+
+  .lords-cinema-frame {
+    width: calc(100% - 28px);
+  }
+
+  .lords-cinema-stage {
+    min-height: 610px;
+    height: 70svh;
+    max-height: 700px;
+  }
+
+  .lords-cinema-vignette {
+    background:
+            linear-gradient(
+                    to top,
+                    rgba(5, 6, 7, 0.88) 0%,
+                    rgba(5, 6, 7, 0.36) 55%,
+                    rgba(5, 6, 7, 0.08) 100%
+            );
+  }
+
+  .lords-cinema-copy {
+    left: 32px;
+    right: 32px;
+
+    top: auto;
+    bottom: 122px;
+
+    width: auto;
+
+    transform: none;
+  }
+
+  .lords-cinema-copy h2 {
+    font-size: 3.7rem;
+  }
+
+  .lords-cinema-copy p {
+    display: none;
+  }
+
+  .lords-cinema-crosshair {
+    right: 8%;
+    top: 31%;
+
+    width: 78px;
+    height: 78px;
+  }
+
+  .lords-cinema-meta {
+    display: none;
+  }
+
+  .lords-cinema-bottom {
+    grid-template-columns: auto 1fr;
+
+    min-height: 64px;
+
+    padding: 0 18px;
+  }
+
+  .lords-cinema-dots {
+    justify-self: end;
+  }
+}
+
+@media (max-width: 560px) {
+  .lords-cinema {
+    padding: 30px 0;
+  }
+
+  .lords-cinema-frame {
+    width: calc(100% - 20px);
+  }
+
+  .lords-cinema-stage {
+    min-height: 560px;
+    height: min(72svh, 640px);
+    max-height: 640px;
+  }
+
+  .lords-cinema-topbar {
+    min-height: 50px;
+    padding: 0 14px;
+    font-size: 0.4rem;
+  }
+
+  .lords-cinema-topbar > div:first-child span:last-child,
+  .lords-cinema-topbar > div:first-child i {
+    display: none;
+  }
+
+  .lords-cinema-copy {
+    left: 18px;
+    right: 18px;
+    bottom: 104px;
+  }
+
+  .lords-cinema-kicker {
+    font-size: 0.45rem;
+  }
+
+  .lords-cinema-copy h2 {
+    font-size: 3.2rem;
+
+    line-height: 0.82;
+  }
+
+  .lords-cinema-book {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .lords-cinema-crosshair {
+    right: 9%;
+    top: 27%;
+    width: 62px;
+    height: 62px;
+  }
+
+  .lords-cinema-crosshair span {
+    width: 20px;
+    height: 20px;
+  }
+
+  .lords-cinema-bottom {
+    min-height: 58px;
+    padding: 0 14px;
+  }
+
+  .lords-cinema-film-edge {
+    display: none;
+  }
+}
+
+@media (
+prefers-reduced-motion:
+        reduce
+) {
+  .lords-cinema *,
+  .lords-cinema *::before,
+  .lords-cinema *::after {
+    animation-duration:
+            0.01ms !important;
+
+    animation-iteration-count:
+            1 !important;
   }
 }
