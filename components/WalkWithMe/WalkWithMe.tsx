@@ -285,6 +285,68 @@ export default function WalkWithMe() {
         }
     }, [open]);
 
+
+    useEffect(() => {
+        if (!open) {
+            return;
+        }
+
+        const root =
+            document.documentElement;
+
+        const viewport =
+            window.visualViewport;
+
+        const updateViewport = () => {
+            const height =
+                viewport?.height ||
+                window.innerHeight;
+
+            root.style.setProperty(
+                "--walk-visible-height",
+                `${Math.round(height)}px`
+            );
+        };
+
+        updateViewport();
+
+        viewport?.addEventListener(
+            "resize",
+            updateViewport
+        );
+
+        viewport?.addEventListener(
+            "scroll",
+            updateViewport
+        );
+
+        window.addEventListener(
+            "resize",
+            updateViewport
+        );
+
+        return () => {
+            viewport?.removeEventListener(
+                "resize",
+                updateViewport
+            );
+
+            viewport?.removeEventListener(
+                "scroll",
+                updateViewport
+            );
+
+            window.removeEventListener(
+                "resize",
+                updateViewport
+            );
+
+            root.style.removeProperty(
+                "--walk-visible-height"
+            );
+        };
+    }, [open]);
+
     const sendMessage = async (
         event: FormEvent<HTMLFormElement>
     ) => {
@@ -385,6 +447,11 @@ export default function WalkWithMe() {
         } catch (error) {
             console.error(error);
 
+            const message =
+                error instanceof Error
+                    ? error.message
+                    : "I couldn't reach the companion service just now. Give me a moment and try again.";
+
             setMessages(
                 (current) => [
                     ...current,
@@ -394,7 +461,7 @@ export default function WalkWithMe() {
                         role:
                             "assistant",
                         content:
-                            "I couldn't reach the companion service just now. Give me a moment and try again.",
+                        message,
                     },
                 ]
             );
@@ -736,7 +803,6 @@ export default function WalkWithMe() {
                 >
                     <div className="walk-input-wrap">
                         <textarea
-
                             ref={
                                 inputRef
                             }
@@ -757,16 +823,15 @@ export default function WalkWithMe() {
                             }
                             rows={1}
                             maxLength={
-                                2000
+                                1200
                             }
                             placeholder="What's on your mind?"
                             aria-label="Message MD Companion"
-
                         />
 
                         <span>
                             {input.length}
-                            /2000
+                            /1200
                         </span>
                     </div>
 

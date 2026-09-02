@@ -6991,3 +6991,203 @@ button:focus-visible {
   color:
           var(--signal);
 }
+
+/* =========================================================
+   WALK WITH ME — MOBILE VIEWPORT FIX
+========================================================= */
+
+.walk-panel {
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+
+  grid-template-rows:
+        auto
+        auto
+        auto
+        minmax(0, 1fr)
+        auto
+        auto;
+}
+
+.walk-messages {
+  min-height: 0;
+
+  overflow-y: auto;
+
+  overscroll-behavior:
+          contain;
+}
+
+.walk-composer {
+  position: relative;
+
+  z-index: 10;
+
+  flex-shrink: 0;
+}
+
+@media (max-width: 760px) {
+  .walk-panel {
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
+  }
+
+  .walk-messages {
+    min-height: 0;
+
+    overflow-y: auto;
+  }
+
+  .walk-composer {
+    position: relative;
+
+    z-index: 20;
+
+    flex-shrink: 0;
+
+    padding:
+            10px
+            10px
+            max(
+                    12px,
+                    env(
+                            safe-area-inset-bottom
+                    )
+            );
+
+    background: #090a0b;
+  }
+
+  .walk-input-wrap {
+    min-height: 54px;
+  }
+
+  .walk-input-wrap textarea {
+    min-height: 54px;
+
+    font-size: 16px;
+  }
+
+  .walk-foot {
+    flex-shrink: 0;
+  }
+}
+
+/* =========================================================
+   WALK WITH ME — MOBILE VIEWPORT / KEYBOARD FIX
+   Append at the very bottom of app/globals.css
+========================================================= */
+
+.walk-panel {
+  height:
+          var(
+                  --walk-visible-height,
+                  100dvh
+          );
+
+  max-height:
+          var(
+                  --walk-visible-height,
+                  100dvh
+          );
+
+  grid-template-rows:
+        auto
+        auto
+        auto
+        minmax(0, 1fr)
+        auto
+        auto;
+}
+
+.walk-messages {
+  min-height: 0;
+
+  overflow-y: auto;
+
+  overscroll-behavior:
+          contain;
+}
+
+.walk-composer {
+  position: relative;
+
+  z-index: 20;
+
+  flex-shrink: 0;
+}
+
+@media (max-width: 760px) {
+  .walk-panel {
+    height:
+            var(
+                    --walk-visible-height,
+                    100dvh
+            );
+
+    min-height: 0;
+
+    max-height:
+            var(
+                    --walk-visible-height,
+                    100dvh
+            );
+  }
+
+  .walk-messages {
+    min-height: 0;
+
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling:
+            touch;
+  }
+
+  .walk-composer {
+    position: relative;
+
+    z-index: 30;
+
+    flex-shrink: 0;
+
+    padding:
+            10px
+            10px
+            max(
+                    12px,
+                    env(
+                            safe-area-inset-bottom
+                    )
+            );
+
+    background: #090a0b;
+
+    box-shadow:
+            0 -12px 28px
+            rgba(0, 0, 0, 0.2);
+  }
+
+  .walk-input-wrap {
+    min-height: 54px;
+  }
+
+  .walk-input-wrap textarea {
+    min-height: 54px;
+
+    max-height: 112px;
+
+    font-size: 16px;
+
+    line-height: 1.4;
+  }
+
+  .walk-send {
+    min-height: 54px;
+  }
+
+  .walk-foot {
+    flex-shrink: 0;
+  }
+}
