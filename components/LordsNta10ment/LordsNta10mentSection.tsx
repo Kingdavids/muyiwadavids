@@ -4,12 +4,110 @@ import Image from "next/image";
 import {
     useEffect,
     useMemo,
+    useRef,
     useState,
 } from "react";
 
 type LordsNta10mentSectionProps = {
     images: string[];
 };
+
+type Testimonial = {
+    quote: string;
+    label: string;
+};
+
+const cities = [
+    "Toronto, ON",
+    "Brampton, ON",
+    "Mississauga, ON",
+    "Vaughan, ON",
+    "Hamilton, ON",
+    "Niagara, ON",
+    "Ottawa, ON",
+    "Windsor, ON",
+    "Barrie, ON",
+    "Sarnia, ON",
+    "Kitchener, ON",
+    "Greater Sudbury, ON",
+    "Montreal, QC",
+    "Laval, QC",
+];
+
+const testimonials: Testimonial[] = [
+    {
+        quote: "Awwn, that’s so cute. I just saw it — the bride loves the video too.",
+        label: "Wedding Film",
+    },
+    {
+        quote: "This picture is too fine.",
+        label: "Portrait Client",
+    },
+    {
+        quote: "Everything blends so beautifully.",
+        label: "Event Client",
+    },
+    {
+        quote: "Ah… one of my favorite pictures of all time.",
+        label: "Client Note",
+    },
+    {
+        quote: "Your work really shows.",
+        label: "Client Note",
+    },
+    {
+        quote: "Awww, it’s a beautiful video.",
+        label: "Video Client",
+    },
+    {
+        quote: "Thank you, boss. 💯",
+        label: "Client Note",
+    },
+    {
+        quote: "Sharp visuals. So stunning.",
+        label: "Client Note",
+    },
+    {
+        quote: "It feels like I want to do the wedding all over again. This is so beautiful.",
+        label: "Wedding Client",
+    },
+    {
+        quote: "World-best videographer/photographer on this.",
+        label: "Client Note",
+    },
+    {
+        quote: "Beautiful.",
+        label: "Client Note",
+    },
+    {
+        quote: "Ayiii… on peut être belles comme ça?",
+        label: "Client Note",
+    },
+    {
+        quote: "So classy and demure.",
+        label: "Client Note",
+    },
+    {
+        quote: "Sharp.",
+        label: "Client Note",
+    },
+    {
+        quote: "Thank you for capturing all these beautiful moments.",
+        label: "Event Client",
+    },
+    {
+        quote: "Steeeeeeeeeze!! I always look forward to your posts every weekend.",
+        label: "Returning Viewer",
+    },
+    {
+        quote: "The second slide… all are so beautiful.",
+        label: "Client Note",
+    },
+    {
+        quote: "Wow, amazing shots!",
+        label: "Client Note",
+    },
+];
 
 export default function LordsNta10mentSection({
                                                   images,
@@ -29,8 +127,8 @@ export default function LordsNta10mentSection({
     ] = useState(0);
 
     const [
-        previousIndex,
-        setPreviousIndex,
+        nextIndex,
+        setNextIndex,
     ] = useState(0);
 
     const [
@@ -38,7 +136,309 @@ export default function LordsNta10mentSection({
         setTransitioning,
     ] = useState(false);
 
+    const [
+        cityIndex,
+        setCityIndex,
+    ] = useState(0);
+
+    const [
+        testimonialIndex,
+        setTestimonialIndex,
+    ] = useState(0);
+
+    const [
+        testimonialVisible,
+        setTestimonialVisible,
+    ] = useState(false);
+
+    const currentIndexRef =
+        useRef(0);
+
+    const transitioningRef =
+        useRef(false);
+
+    const intervalRef =
+        useRef<number | null>(
+            null
+        );
+
+    const commitTimerRef =
+        useRef<number | null>(
+            null
+        );
+
+    const settleTimerRef =
+        useRef<number | null>(
+            null
+        );
+
+    const testimonialTimerRef =
+        useRef<number | null>(
+            null
+        );
+
+    const mountedRef =
+        useRef(true);
+
+    const transitionCountRef =
+        useRef(0);
+
     useEffect(() => {
+        currentIndexRef.current =
+            currentIndex;
+    }, [currentIndex]);
+
+    useEffect(() => {
+        transitioningRef.current =
+            transitioning;
+    }, [transitioning]);
+
+    const clearTransitionTimers =
+        () => {
+            if (
+                commitTimerRef.current !==
+                null
+            ) {
+                window.clearTimeout(
+                    commitTimerRef.current
+                );
+
+                commitTimerRef.current =
+                    null;
+            }
+
+            if (
+                settleTimerRef.current !==
+                null
+            ) {
+                window.clearTimeout(
+                    settleTimerRef.current
+                );
+
+                settleTimerRef.current =
+                    null;
+            }
+
+            if (
+                testimonialTimerRef.current !==
+                null
+            ) {
+                window.clearTimeout(
+                    testimonialTimerRef.current
+                );
+
+                testimonialTimerRef.current =
+                    null;
+            }
+        };
+
+    const getRandomIndex = (
+        length: number,
+        excludeIndex: number
+    ) => {
+        if (length <= 1) {
+            return excludeIndex;
+        }
+
+        let randomIndex =
+            excludeIndex;
+
+        while (
+            randomIndex ===
+            excludeIndex
+            ) {
+            randomIndex =
+                Math.floor(
+                    Math.random() *
+                    length
+                );
+        }
+
+        return randomIndex;
+    };
+
+    const preloadImage = (
+        src: string
+    ) =>
+        new Promise<void>(
+            (resolve) => {
+                const image =
+                    new window.Image();
+
+                image.onload =
+                    () =>
+                        resolve();
+
+                image.onerror =
+                    () =>
+                        resolve();
+
+                image.src =
+                    src;
+            }
+        );
+
+    const updateEditorialData =
+        () => {
+            setCityIndex(
+                (currentCity) =>
+                    getRandomIndex(
+                        cities.length,
+                        currentCity
+                    )
+            );
+
+            transitionCountRef.current +=
+                1;
+
+            if (
+                transitionCountRef.current %
+                3 ===
+                0
+            ) {
+                setTestimonialIndex(
+                    (
+                        currentTestimonial
+                    ) =>
+                        getRandomIndex(
+                            testimonials.length,
+                            currentTestimonial
+                        )
+                );
+
+                setTestimonialVisible(
+                    true
+                );
+
+                testimonialTimerRef.current =
+                    window.setTimeout(
+                        () => {
+                            if (
+                                mountedRef.current
+                            ) {
+                                setTestimonialVisible(
+                                    false
+                                );
+                            }
+                        },
+                        3500
+                    );
+            }
+        };
+
+    const startTransition =
+        async (
+            targetIndex?: number
+        ) => {
+            if (
+                transitioningRef.current ||
+                safeImages.length <
+                2
+            ) {
+                return;
+            }
+
+            const activeIndex =
+                currentIndexRef.current;
+
+            const resolvedNext =
+                typeof targetIndex ===
+                "number"
+                    ? targetIndex
+                    : getRandomIndex(
+                        safeImages.length,
+                        activeIndex
+                    );
+
+            if (
+                resolvedNext ===
+                activeIndex
+            ) {
+                return;
+            }
+
+            transitioningRef.current =
+                true;
+
+            await preloadImage(
+                safeImages[
+                    resolvedNext
+                    ]
+            );
+
+            if (!mountedRef.current) {
+                return;
+            }
+
+            setNextIndex(
+                resolvedNext
+            );
+
+            window.requestAnimationFrame(
+                () => {
+                    window.requestAnimationFrame(
+                        () => {
+                            if (
+                                !mountedRef.current
+                            ) {
+                                return;
+                            }
+
+                            setTransitioning(
+                                true
+                            );
+                        }
+                    );
+                }
+            );
+
+            clearTransitionTimers();
+
+            commitTimerRef.current =
+                window.setTimeout(
+                    () => {
+                        if (
+                            !mountedRef.current
+                        ) {
+                            return;
+                        }
+
+                        currentIndexRef.current =
+                            resolvedNext;
+
+                        setCurrentIndex(
+                            resolvedNext
+                        );
+
+                        updateEditorialData();
+                    },
+                    760
+                );
+
+            settleTimerRef.current =
+                window.setTimeout(
+                    () => {
+                        if (
+                            !mountedRef.current
+                        ) {
+                            return;
+                        }
+
+                        transitioningRef.current =
+                            false;
+
+                        setTransitioning(
+                            false
+                        );
+                    },
+                    940
+                );
+        };
+
+    useEffect(() => {
+        mountedRef.current =
+            true;
+
         if (
             safeImages.length <
             2
@@ -46,60 +446,49 @@ export default function LordsNta10mentSection({
             return;
         }
 
-        const timer =
+        intervalRef.current =
             window.setInterval(
                 () => {
-                    setPreviousIndex(
-                        currentIndex
-                    );
-
-                    setTransitioning(
-                        true
-                    );
-
-                    window.setTimeout(
-                        () => {
-                            let nextIndex =
-                                currentIndex;
-
-                            while (
-                                nextIndex ===
-                                currentIndex
-                                ) {
-                                nextIndex =
-                                    Math.floor(
-                                        Math.random() *
-                                        safeImages.length
-                                    );
-                            }
-
-                            setCurrentIndex(
-                                nextIndex
-                            );
-                        },
-                        260
-                    );
-
-                    window.setTimeout(
-                        () => {
-                            setTransitioning(
-                                false
-                            );
-                        },
-                        920
-                    );
+                    void startTransition();
                 },
-                5200
+                5600
             );
 
-        return () =>
-            window.clearInterval(
-                timer
-            );
-    }, [
-        currentIndex,
-        safeImages.length,
-    ]);
+        return () => {
+            if (
+                intervalRef.current !==
+                null
+            ) {
+                window.clearInterval(
+                    intervalRef.current
+                );
+
+                intervalRef.current =
+                    null;
+            }
+        };
+
+        // Intentionally keep one stable interval.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [safeImages.length]);
+
+    useEffect(() => {
+        return () => {
+            mountedRef.current =
+                false;
+
+            if (
+                intervalRef.current !==
+                null
+            ) {
+                window.clearInterval(
+                    intervalRef.current
+                );
+            }
+
+            clearTransitionTimers();
+        };
+    }, []);
 
     if (!safeImages.length) {
         return null;
@@ -110,10 +499,11 @@ export default function LordsNta10mentSection({
             currentIndex
             ];
 
-    const previousImage =
+    const upcomingImage =
         safeImages[
-            previousIndex
-            ];
+            nextIndex
+            ] ??
+        currentImage;
 
     const displayNumber =
         String(
@@ -124,43 +514,6 @@ export default function LordsNta10mentSection({
         String(
             safeImages.length
         ).padStart(2, "0");
-
-    const selectSlide = (
-        index: number
-    ) => {
-        if (
-            index ===
-            currentIndex
-        ) {
-            return;
-        }
-
-        setPreviousIndex(
-            currentIndex
-        );
-
-        setTransitioning(
-            true
-        );
-
-        window.setTimeout(
-            () => {
-                setCurrentIndex(
-                    index
-                );
-            },
-            220
-        );
-
-        window.setTimeout(
-            () => {
-                setTransitioning(
-                    false
-                );
-            },
-            880
-        );
-    };
 
     return (
         <section
@@ -175,22 +528,6 @@ export default function LordsNta10mentSection({
 
             <div className="lords-cinema-frame">
                 <div className="lords-cinema-stage">
-                    <div className="lords-cinema-image lords-cinema-image-previous">
-                        <Image
-                            src={
-                                previousImage
-                            }
-                            alt=""
-                            fill
-                            sizes="100vw"
-                            priority={
-                                previousIndex ===
-                                0
-                            }
-                            className="lords-cinema-photo"
-                        />
-                    </div>
-
                     <div className="lords-cinema-image lords-cinema-image-current">
                         <Image
                             src={
@@ -207,26 +544,14 @@ export default function LordsNta10mentSection({
                         />
                     </div>
 
-                    <div className="lords-cinema-slice lords-cinema-slice-left">
+                    <div className="lords-cinema-image lords-cinema-image-next">
                         <Image
                             src={
-                                currentImage
+                                upcomingImage
                             }
                             alt=""
                             fill
-                            sizes="50vw"
-                            className="lords-cinema-photo"
-                        />
-                    </div>
-
-                    <div className="lords-cinema-slice lords-cinema-slice-right">
-                        <Image
-                            src={
-                                currentImage
-                            }
-                            alt=""
-                            fill
-                            sizes="50vw"
+                            sizes="100vw"
                             className="lords-cinema-photo"
                         />
                     </div>
@@ -235,12 +560,69 @@ export default function LordsNta10mentSection({
                     <div className="lords-cinema-exposure" />
                     <div className="lords-cinema-scan" />
 
+                    <div className="lords-cinema-location">
+                        <span>
+                            NOW FRAMING
+                        </span>
+
+                        <strong
+                            key={
+                                cities[
+                                    cityIndex
+                                    ]
+                            }
+                        >
+                            {
+                                cities[
+                                    cityIndex
+                                    ]
+                            }
+                        </strong>
+                    </div>
+
+                    <aside
+                        className={`lords-cinema-testimonial ${
+                            testimonialVisible
+                                ? "lords-cinema-testimonial-visible"
+                                : ""
+                        }`}
+                        aria-live="polite"
+                    >
+                        <span>
+                            CLIENT NOTE /
+                            {String(
+                                testimonialIndex +
+                                1
+                            ).padStart(
+                                2,
+                                "0"
+                            )}
+                        </span>
+
+                        <blockquote>
+                            “
+                            {
+                                testimonials[
+                                    testimonialIndex
+                                    ].quote
+                            }
+                            ”
+                        </blockquote>
+
+                        <small>
+                            {
+                                testimonials[
+                                    testimonialIndex
+                                    ].label
+                            }
+                        </small>
+                    </aside>
+
                     <div className="lords-cinema-crosshair">
                         <span />
                         <span />
                         <span />
                         <span />
-
                         <i />
                     </div>
 
@@ -268,8 +650,8 @@ export default function LordsNta10mentSection({
 
                     <div className="lords-cinema-copy">
                         <div className="lords-cinema-kicker">
-                            TORONTO +
-                            BEYOND
+                            ONTARIO +
+                            QUEBEC
                         </div>
 
                         <h2>
@@ -325,33 +707,26 @@ export default function LordsNta10mentSection({
 
                         <div className="lords-cinema-meta">
                             <span>
-                                TORONTO &
-                                GTA
+                                ONTARIO
                             </span>
 
                             <i />
 
                             <span>
-                                WEDDINGS
+                                MONTREAL
                             </span>
 
                             <i />
 
                             <span>
-                                EVENTS
+                                LAVAL
                             </span>
 
                             <i />
 
                             <span>
-                                PORTRAITS
-                            </span>
-
-                            <i />
-
-                            <span>
-                                CINEMATIC
-                                FILM
+                                TRAVEL
+                                AVAILABLE
                             </span>
                         </div>
 
@@ -377,7 +752,7 @@ export default function LordsNta10mentSection({
                                                 : ""
                                         }
                                         onClick={() =>
-                                            selectSlide(
+                                            void startTransition(
                                                 index
                                             )
                                         }
